@@ -1,6 +1,7 @@
 import React from 'react';
 import '../pages/SignIn.css';
 import { useNavigate } from 'react-router-dom';
+import img from '../assets/signupimg3.jpg';
 
 const SignIn = () => {
 
@@ -61,7 +62,7 @@ const SignIn = () => {
                     </div>
                 </div>
                 <div className='signup-right'>
-                    <img className='signup-img' src='/src/assets/signupimg3.jpg' />
+                    <img className='signup-img' src={img} />
                 </div>
 
             </div>
