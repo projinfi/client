@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../pages/SignIn.css';
 import { useNavigate } from 'react-router-dom';
 import signimg from '../assets/signupimg3.jpg';
 
+
 const SignIn = () => {
 
+  
     const navigate = useNavigate();
 
     const goToSignupPage = () => {
