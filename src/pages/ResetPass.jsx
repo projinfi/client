@@ -1,13 +1,14 @@
 import React from 'react';
 import '../pages/ResetPass.css';
 import { useNavigate } from 'react-router-dom';
+import signimg from '../assets/signupimg3.jpg';
 
 const ResetPass = () => {
 
     const navigate = useNavigate();
 
     const goToSigninPage = () => {
-        navigate('/signin')
+        navigate('/')
     }
 
   return (
@@ -49,7 +50,7 @@ const ResetPass = () => {
                 </div>
             </div>
             <div className='signup-right'>
-                <img className='signup-img' src='/src/assets/signupimg3.jpg'/>
+                <img className='signup-img' src={signimg}/>
             </div>
 
         </div>

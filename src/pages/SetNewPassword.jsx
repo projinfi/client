@@ -1,6 +1,7 @@
 import React from 'react';
 import '../pages/SetNewPassword.css';
 import { useNavigate } from 'react-router-dom';
+import signimg from '../assets/signupimg3.jpg';
 
 const SetNewPassword = () => {
 
@@ -59,7 +60,7 @@ const SetNewPassword = () => {
                     </div>
                 </div>
                 <div className='signup-right'>
-                    <img className='signup-img' src='/src/assets/signupimg3.jpg' />
+                    <img className='signup-img' src={signimg} />
                 </div>
 
             </div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import '../pages/SignUp.css';
 import { useNavigate } from 'react-router-dom';
+import signimg from '../assets/signupimg3.jpg';
 
 const SignUp = () => {
 
     const navigate = useNavigate();
 
     const goToSigninPage = () => {
-        navigate('/signin')
+        navigate('/')
     }
 
   return (
@@ -65,7 +66,7 @@ const SignUp = () => {
                 </div>
             </div>
             <div className='signup-right'>
-                <img className='signup-img' src='/src/assets/signupimg3.jpg'/>
+                <img className='signup-img' src={signimg}/>
             </div>
 
         </div>
