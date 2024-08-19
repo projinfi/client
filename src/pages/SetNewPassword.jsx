@@ -1,9 +1,16 @@
 import React from 'react';
 import '../pages/SetNewPassword.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import signimg from '../assets/signupimg3.jpg';
+import axios from 'axios';
 
-const SetNewPassword = () => {
+
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+const SetNewPassword = async() => {
 
     const navigate = useNavigate();
 
@@ -14,6 +21,26 @@ const SetNewPassword = () => {
     const ResetPassword = () => {
         navigate('/resetpassword');
     }
+
+    const query = useQuery();
+    const token = query.get('token')
+
+    console.log(token)
+
+   try{
+    const isTokenValid = await axios.post('https://server-orcin-delta.vercel.app/users/verifyResetToken', token, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+   }catch(err){
+    console.log('invalid token',err)
+    goToSignupPage()
+   }
+   
+    
+
+ 
 
 
     return (

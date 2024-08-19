@@ -6,6 +6,10 @@ import axios from 'axios'
 
 const SignUp = () => {
 
+    const [isLoading,setIsLoading] = useState(false)
+    const [resMsg,setResMsg] = useState('')
+    
+
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -23,16 +27,20 @@ const SignUp = () => {
         navigate('/');
     };
 
-    const submitForm = async() => {
-        try{
-         const response =  await axios.post('https://server-orcin-delta.vercel.app/users/signUp',userData,{
-            headers : {
-                'Content-Type' : 'application/json'
-            }
-           })
-           console.log('success',response)
-        }catch(error){
-            console.log('error in signup',error)
+    const submitForm = async () => {
+        try {
+            setIsLoading(true)
+            const response = await axios.post('https://server-orcin-delta.vercel.app/users/signUp', userData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            setIsLoading(false)
+            console.log('success', response)
+        } catch (error) {
+            setIsLoading(false)
+            setResMsg('user already exists :(')
+            console.log('error in signup', error)
         }
     }
 
@@ -94,11 +102,16 @@ const SignUp = () => {
                             <label className='label-text' htmlFor='verify-box'>I agree to the terms & policy</label>
                         </div>
 
-                        <div className='signup-input-contentbox'>
+                      
+
+                        {isLoading ? ( <div className='loader-space'><span class="loader"></span></div> ):(  <div className='signup-input-contentbox'>
                             <div onClick={submitForm} className='signup-btn'>
                                 Signup
                             </div>
-                        </div>
+                        </div>)}
+
+                    
+                        <div className='error-status'>{resMsg}</div>
 
                         <div className='dont-have-account'>
                             Have an account <b onClick={goToSigninPage} className='signup-prompt'>SignIn</b>
