@@ -13,7 +13,7 @@ const SetNewPassword = () => {
     const query = useQuery();
     const token = query.get('token');
     const [isTokenValid, setIsTokenValid] = useState(null);
-    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -41,7 +41,7 @@ const SetNewPassword = () => {
     }, [token, navigate]);
 
     const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+        setNewPassword(e.target.value);
     };
 
     const handleConfirmPasswordChange = (e) => {
@@ -49,13 +49,13 @@ const SetNewPassword = () => {
     };
 
     const handleChangePassword = async () => {
-        if (password !== confirmPassword) {
+        if (newPassword !== confirmPassword) {
             setError('Passwords do not match');
             return;
         }
 
         try {
-            await axios.post('https://server-orcin-delta.vercel.app/users/updatePassword', { token, password }, {
+            await axios.post('https://server-orcin-delta.vercel.app/users/updatePassword', { token, newPassword }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -95,7 +95,7 @@ const SetNewPassword = () => {
                                             className='input-text-field'
                                             type='password'
                                             placeholder='Password'
-                                            value={password}
+                                            value={newPassword}
                                             onChange={handlePasswordChange}
                                         />
                                     </div>
