@@ -7,6 +7,7 @@ import axios from 'axios';
 const SignIn = () => {
     const[isLoading,setIsLoading] = useState(false)
     const [resMsg,setResMsg] = useState('')
+    const [successMsg,setSuccessMsg] = useState('')
     const [userData, setUserData] = useState({
         email: "",
         password: ""
@@ -27,6 +28,7 @@ const SignIn = () => {
             });
             setIsLoading(false)
             console.log('success', res);
+            setSuccessMsg(`welcome ${res.data.name}`)
         } catch (err) {
             setIsLoading(false)
             setResMsg('invalid credentials')
@@ -84,6 +86,7 @@ const SignIn = () => {
 
                      
                         <div className='error-status'>{resMsg}</div>
+                        <div className='success-status'>{successMsg}</div>
                        
 
                         <div className='dont-have-account'>
