@@ -1,98 +1,137 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../pages/SetNewPassword.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import signimg from '../assets/signupimg3.jpg';
 import axios from 'axios';
 
-
-
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-const SetNewPassword = async() => {
-
+const SetNewPassword = () => {
     const navigate = useNavigate();
+    const query = useQuery();
+    const token = query.get('token');
+    const [isTokenValid, setIsTokenValid] = useState(null);
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const verifyToken = async () => {
+            try {
+                await axios.post('https://server-orcin-delta.vercel.app/users/verifyResetToken', { token }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                setIsTokenValid(true);
+            } catch (err) {
+                console.log('Error verifying token', err);
+                setError('Invalid token');
+                setIsTokenValid(false);
+                navigate('/signup');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        verifyToken();
+    }, [token, navigate]);
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+    };
+
+    const handleChangePassword = async () => {
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+
+        try {
+            await axios.post('https://server-orcin-delta.vercel.app/users/updatePassword', { token, password }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            navigate('/');
+        } catch (err) {
+            console.log('Error resetting password', err);
+            setError('Failed to reset password');
+        }
+    };
 
     const goToSignupPage = () => {
         navigate('/signup');
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
     }
-
-    const ResetPassword = () => {
-        navigate('/resetpassword');
-    }
-
-    const query = useQuery();
-    const token = query.get('token')
-
-    console.log(token)
-
-   try{
-    const isTokenValid = await axios.post('https://server-orcin-delta.vercel.app/users/verifyResetToken', token, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-   }catch(err){
-    console.log('invalid token',err)
-    goToSignupPage()
-   }
-   
-    
-
- 
-
 
     return (
         <div className='signup-page'>
             <div className='signup-container'>
-
                 <div className='signup-left'>
                     <div className='signup-left-contents'>
-
                         <div className='register-title'>Change Password</div>
 
+                        {error && <div className="error-message">{error}</div>}
 
+                        {isTokenValid && (
+                            <>
+                                <div className='signup-input-contentbox'>
+                                    <div className='signup-name-sec'>
+                                        <div className='signup-name'>Password</div>
+                                    </div>
+                                    <div className='signup-inputfield-sec'>
+                                        <input
+                                            className='input-text-field'
+                                            type='password'
+                                            placeholder='Password'
+                                            value={password}
+                                            onChange={handlePasswordChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div className='signup-input-contentbox'>
+                                    <div className='signup-name-sec'>
+                                        <div className='signup-name'>Confirm Password</div>
+                                    </div>
+                                    <div className='signup-inputfield-sec'>
+                                        <input
+                                            className='input-text-field'
+                                            type='password'
+                                            placeholder='Confirm Password'
+                                            value={confirmPassword}
+                                            onChange={handleConfirmPasswordChange}
+                                        />
+                                    </div>
+                                </div>
 
-                     
+                                <div className='signup-input-contentbox'>
+                                    <div className='signup-btn' onClick={handleChangePassword}>
+                                        Change Password
+                                    </div>
+                                </div>
+                            </>
+                        )}
 
-                        <div className='signup-input-contentbox'>
-                            <div className='signup-name-sec'>
-                                <div className='signup-name'>Password</div>
-                            </div>
-                            <div className='signup-inputfield-sec'>
-                                <input className='input-text-field' type='text' placeholder='password' />
-                            </div>
-                        </div>
-                        <div className='signup-input-contentbox'>
-                            <div className='signup-name-sec'>
-                                <div className='signup-name'>Confirm Password</div>
-                            </div>
-                            <div className='signup-inputfield-sec'>
-                                <input className='input-text-field' type='text' placeholder='password' />
-                            </div>
-                        </div>
-
-                     
-
-                        <div className='signup-input-contentbox'>
-
-                            <div className='signup-btn'>
-                                Change Password
-                            </div>
-                        </div>
-
-                        <div className='dont-have-account'>Don't have account <b onClick={goToSignupPage} className='signup-prompt'>Signup</b> </div>
-                        
+                        <div className='dont-have-account'>Don't have an account? <b onClick={goToSignupPage} className='signup-prompt'>Signup</b></div>
                     </div>
                 </div>
                 <div className='signup-right'>
-                    <img className='signup-img' src={signimg} />
+                    <img className='signup-img' src={signimg} alt='Signup' />
                 </div>
-
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SetNewPassword
+export default SetNewPassword;
