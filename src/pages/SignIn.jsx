@@ -27,8 +27,13 @@ const SignIn = () => {
                 }
             });
             setIsLoading(false)
-            console.log('success', res);
-            setSuccessMsg(`welcome ${res.data.name}`)
+            if(res.data && res.data.name){
+                console.log('success', res);
+                setSuccessMsg(`welcome ${res.data.name}`)
+            }else{
+                setResMsg('invalid credentials')
+            }
+          
         } catch (err) {
             setIsLoading(false)
             setResMsg('invalid credentials')
@@ -84,11 +89,8 @@ const SignIn = () => {
                             </div>
                         </div>)}
 
-                     
-                        <div className='error-status'>{resMsg}</div>
-                        <div className='success-status'>{successMsg}</div>
+                      {successMsg ? ( <div className='success-status'>{successMsg}</div>):( <div className='error-status'>{resMsg}</div>)}
                        
-
                         <div className='dont-have-account'>
                             Don't have account <b onClick={goToSignupPage} className='signup-prompt'>Sign Up</b> | <b onClick={ResetPassword} className='signup-prompt'>Reset Password</b>
                         </div>

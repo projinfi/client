@@ -8,6 +8,7 @@ const SignUp = () => {
 
     const [isLoading,setIsLoading] = useState(false)
     const [resMsg,setResMsg] = useState('')
+    const [successMsg,setSuccessMsg] = useState('')
     
 
     const [userData, setUserData] = useState({
@@ -28,6 +29,8 @@ const SignUp = () => {
     };
 
     const submitForm = async () => {
+        setSuccessMsg('')
+        setResMsg('')
         try {
             setIsLoading(true)
             const response = await axios.post('https://server-orcin-delta.vercel.app/users/signUp', userData, {
@@ -35,8 +38,14 @@ const SignUp = () => {
                     'Content-Type': 'application/json'
                 }
             })
-            setIsLoading(false)
-            console.log('success', response)
+            if(response.data.name && response.data){
+                setSuccessMsg('registered successfully')
+                setIsLoading(false)
+                console.log('success', response)
+            }else{
+                setResMsg('user already exists :(')
+            }
+           
         } catch (error) {
             setIsLoading(false)
             setResMsg('user already exists :(')
@@ -111,7 +120,8 @@ const SignUp = () => {
                         </div>)}
 
                     
-                        <div className='error-status'>{resMsg}</div>
+                     
+                        {successMsg ? ( <div className='success-status'>{successMsg}</div>):( <div className='error-status'>{resMsg}</div>)}
 
                         <div className='dont-have-account'>
                             Have an account <b onClick={goToSigninPage} className='signup-prompt'>SignIn</b>
