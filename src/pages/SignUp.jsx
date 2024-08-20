@@ -40,6 +40,7 @@ const SignUp = () => {
             })
             if(response.data.name && response.data){
                 setSuccessMsg('registered successfully')
+                localStorage.setItem('userToken',response.data.usertoken)
                 setIsLoading(false)
                 console.log('success', response)
             }else{

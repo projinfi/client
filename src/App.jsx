@@ -4,6 +4,8 @@ import SignIn from './pages/SignIn';
 import ResetPass from './pages/ResetPass';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SetNewPassword from './pages/SetNewPassword';
+import Home from './pages/Home';
+import ProtectedRoutes from './routes/ProtectedRoutes';
 
 function App() {
 
@@ -15,6 +17,7 @@ function App() {
           <Route path='/' element={<SignIn />} />
           <Route path='/resetpassword' element={<ResetPass />} />
           <Route path='/users/verifyResetToken' element={<SetNewPassword />} />
+          <Route path='/home' element={<ProtectedRoutes element={Home} />} /> {/* Use ProtectedRoute here */}
         </Routes>
       </BrowserRouter>
     </>
