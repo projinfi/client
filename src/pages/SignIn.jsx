@@ -29,8 +29,9 @@ const SignIn = () => {
             setIsLoading(false)
             if(res.data && res.data.name){
                 console.log('success', res);
-                localStorage.setItem('userToken',response.data.usertoken)
+                localStorage.setItem('userToken',res.data.usertoken)
                 setSuccessMsg(`welcome ${res.data.name}`)
+                navigate('/home')
             }else{
                 setResMsg('invalid credentials')
             }
