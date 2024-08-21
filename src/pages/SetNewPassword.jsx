@@ -17,6 +17,15 @@ const SetNewPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [validPassword,setValidPassword] = useState(false)
+
+    useEffect(() => {
+        if (newPassword.length >= 6 && confirmPassword.length >= 6 && newPassword === confirmPassword) {
+            setValidPassword(true);
+        } else {
+            setValidPassword(false);
+        }
+    }, [newPassword,confirmPassword]);
 
     useEffect(() => {
         const verifyToken = async () => {
@@ -116,7 +125,7 @@ const SetNewPassword = () => {
                                 </div>
 
                                 <div className='signup-input-contentbox'>
-                                    <div className='signup-btn' onClick={handleChangePassword}>
+                                    <div className={`signup-btn ${validPassword ? "" : "btn-disabled"}`} onClick={handleChangePassword}>
                                         Change Password
                                     </div>
                                 </div>

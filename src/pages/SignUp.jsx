@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import '../pages/SignUp.css';
 import { useNavigate } from 'react-router-dom';
 import signimg from '../assets/signupimg3.jpg';
@@ -9,6 +9,8 @@ const SignUp = () => {
     const [isLoading,setIsLoading] = useState(false)
     const [resMsg,setResMsg] = useState('')
     const [successMsg,setSuccessMsg] = useState('')
+    const [isFieldsFilled,setFieldsFilled] = useState(false)
+    const [isCheckboxChecked,setCheckboxChecked] = useState(false)
     
 
     const [userData, setUserData] = useState({
@@ -16,6 +18,24 @@ const SignUp = () => {
         email: '',
         password: ''
     });
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email)
+    }
+
+    const onCheckboxChange = (e) => {
+        setCheckboxChecked(e.target.checked)
+        console.log(isCheckboxChecked)
+    }
+
+    useEffect(()=>{
+        if(userData.email && userData.password && validateEmail(userData.email) && userData.password.length >= 6 && isCheckboxChecked){
+             setFieldsFilled(true)
+        }else{
+            setFieldsFilled(false)
+        }
+    },[userData,isCheckboxChecked])
 
     const onFieldChange = (e) => {
         const { name, value } = e.target;
@@ -108,14 +128,14 @@ const SignUp = () => {
                         </div>
 
                         <div className='verify-label'>
-                            <input className='checkbox' id='verify-box' type='checkbox' />
+                            <input className='checkbox' id='verify-box' type='checkbox' onChange={onCheckboxChange} checked={isCheckboxChecked}/>
                             <label className='label-text' htmlFor='verify-box'>I agree to the terms & policy</label>
                         </div>
 
                       
 
                         {isLoading ? ( <div className='loader-space'><span class="loader"></span></div> ):(  <div className='signup-input-contentbox'>
-                            <div onClick={submitForm} className='signup-btn'>
+                            <div onClick={submitForm} className={`signup-btn ${isFieldsFilled ? "" : "btn-disabled"}`}>
                                 Signup
                             </div>
                         </div>)}

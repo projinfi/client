@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../pages/SignIn.css';
 import { useNavigate } from 'react-router-dom';
 import signimg from '../assets/signupimg3.jpg';
@@ -8,12 +8,33 @@ const SignIn = () => {
     const[isLoading,setIsLoading] = useState(false)
     const [resMsg,setResMsg] = useState('')
     const [successMsg,setSuccessMsg] = useState('')
+    const [isFieldsFilled,setFieldsFilled] = useState(false)
+    const [isCheckboxChecked,setCheckboxChecked] = useState(false)
     const [userData, setUserData] = useState({
         email: "",
         password: ""
     });
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email)
+    }
+
+    const onCheckboxChange = (e) => {
+        setCheckboxChecked(e.target.checked)
+        console.log(isCheckboxChecked)
+    }
+
+    useEffect(()=>{
+        if(userData.email && userData.password && validateEmail(userData.email) && userData.password.length >= 6 && isCheckboxChecked){
+             setFieldsFilled(true)
+        }else{
+            setFieldsFilled(false)
+        }
+    },[userData,isCheckboxChecked])
+
     const onDataChange = (e) => {
+       
         const { name, value } = e.target;
         setUserData((prev) => ({ ...prev, [name]: value }));
     };
@@ -81,12 +102,12 @@ const SignIn = () => {
                         </div>
 
                         <div className='verify-label'>
-                            <input className='checkbox' id='verify-box' type='checkbox' />
+                            <input className='checkbox' id='verify-box' onChange={onCheckboxChange}  checked={isCheckboxChecked} type='checkbox' />
                             <label className='label-text' htmlFor="verify-box">I agree to the terms & policy</label>
                         </div>
 
                         {isLoading ? ( <div className='loader-space'><span class="loader"></span></div> ):(   <div className='signup-input-contentbox'>
-                            <div onClick={userSignIn} className='signup-btn'>
+                            <div onClick={isFieldsFilled ? userSignIn : null} className={`signup-btn ${isFieldsFilled ? "" :"btn-disabled"}`}>
                                 Sign In
                             </div>
                         </div>)}
