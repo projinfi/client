@@ -1,0 +1,38 @@
+.loader {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(0deg, rgba(200, 233, 200, 0.2) 33%, #3A5B22 100%);
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+  .loader-space{
+    padding: 20px;
+  
+  }
+  .error-status{
+    color: red;
+    font-weight: 400;
+  }
+  .success-status{
+    color: rgb(26, 141, 22);
+    font-weight: 400;
+  }
+  @keyframes rotation {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg)}
+  } 

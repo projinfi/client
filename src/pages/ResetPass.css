@@ -1,0 +1,143 @@
+.signup-page{
+    /* background-color: antiquewhite; */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.signup-container{
+    /* background-color: aqua; */
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    display: flex;
+}
+.signup-left{
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-left-contents{
+    /* background-color: aquamarine; */
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+   
+}
+.signup-input-contentbox{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.signup-inputfield-sec{
+    width: 90%;
+}
+.input-text-field{
+    width: 100%;
+    padding: 12px;
+    margin: 0;
+    border: none;
+    border-radius: 8px;
+    border: 1px solid rgb(228, 228, 228);
+    font-size: 16px;
+}
+.input-text-field:focus{
+  outline: none;
+    border: none;
+    border: 1px solid rgb(228, 228, 228);
+}
+.signup-right{
+    /* background-color: rgb(183, 219, 147); */
+background-size: cover;
+background-position: center;
+    width: 50%;
+ height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.register-title{
+    font-weight: 500;
+    font-size: 24px;
+}
+.signup-name{
+    font-size: 22px;
+    font-weight: 400;
+}
+.verify-label{
+ display: flex;
+width: 80%;
+    gap: 4px;
+}
+#verify-box{
+cursor: pointer;
+width: 16px;
+
+}
+
+.label-text{
+    font-size: 18px;
+}
+
+.signup-btn{
+width: 90%;
+text-align: center;
+background-color: #3A5B22;
+padding: 12px;
+color: aliceblue;
+font-weight: 500;
+cursor: pointer;
+margin-top: 14px;
+}
+.signup-right{
+    background-size: cover;
+  
+}
+.signup-img{
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    max-width: 1400px;
+   height: auto;
+
+}
+.signup-prompt{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 950px) and (min-width: 0px) {
+    .signup-left{
+        width: 100%;
+     
+    
+    }
+    .signup-right{
+        width: 100%;
+ display: none;
+    }
+  
+ 
+  .signup-container{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+}
+.btn-disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    pointer-events: none;
+}
