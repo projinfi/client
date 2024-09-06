@@ -12,6 +12,7 @@ const SignUp = () => {
     const [isFieldsFilled,setFieldsFilled] = useState(false)
     const [isCheckboxChecked,setCheckboxChecked] = useState(false)
     
+
     const [userData, setUserData] = useState({
         name: '',
         email: '',
