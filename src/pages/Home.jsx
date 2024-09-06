@@ -1,6 +1,11 @@
 import React from 'react';
 import '../pages/Home.css';
 import Navbar from '../components/Navbar';
+import {Swiper,SwiperSlide} from 'swiper/react';
+import slide1 from '../assets/swiperimg1.png';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+
 
 const Home = () => {
   return (
@@ -16,7 +21,23 @@ const Home = () => {
       <div className='home-content'>
 
         <div className='home-slider-space'>
-          slider
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            speed={1200}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+          >
+            <SwiperSlide><img className='swiper-slide-image' src={slide1}/></SwiperSlide>
+            <SwiperSlide><img className='swiper-slide-image' src={slide1}/></SwiperSlide>
+           
+          
+          </Swiper>
         </div>
 
       </div>
