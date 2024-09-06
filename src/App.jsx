@@ -14,10 +14,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/' element={<SignIn />} />
+          <Route path='/signin' element={<SignIn />} />
           <Route path='/resetpassword' element={<ResetPass />} />
           <Route path='/users/verifyResetToken' element={<SetNewPassword />} />
-          <Route path='/home' element={<ProtectedRoutes element={Home} />} /> {/* Use ProtectedRoute here */}
+          <Route path='/' element={<ProtectedRoutes element={Home} />} /> {/* Use ProtectedRoute here */}
         </Routes>
       </BrowserRouter>
     </>

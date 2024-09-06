@@ -52,7 +52,7 @@ const SignIn = () => {
                 console.log('success', res);
                 localStorage.setItem('userToken',res.data.usertoken)
                 setSuccessMsg(`welcome ${res.data.name}`)
-                navigate('/home')
+                navigate('/')
             }else{
                 setResMsg('invalid credentials')
             }
