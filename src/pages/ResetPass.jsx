@@ -49,7 +49,7 @@ const ResetPass = () => {
     const navigate = useNavigate();
 
     const goToSigninPage = () => {
-        navigate('/');
+        navigate('/signin');
     };
 
     return (
