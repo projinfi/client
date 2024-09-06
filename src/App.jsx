@@ -13,13 +13,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      
-     <Routes>
+        <Routes>
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/resetpassword' element={<ResetPass />} />
           <Route path='/users/verifyResetToken' element={<SetNewPassword />} />
-          <Route path='/' element={<ProtectedRoutes element={Home} />} /> 
+          <Route path='/' element={<ProtectedRoutes element={Home} />} />
         </Routes>
       </BrowserRouter>
     </>

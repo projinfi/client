@@ -37,7 +37,7 @@ const ProtectedRoutes = ({ element: Component, ...rest }) => {
         return <div>Loading...</div>; // You can display a loading spinner or some placeholder here
     }
 
-    return isAuthenticated ? <Component {...rest} /> : <Navigate to="/" />;
+    return isAuthenticated ? <Component {...rest} /> : <Navigate to="/signin" />;
 }
 
 export default ProtectedRoutes;
