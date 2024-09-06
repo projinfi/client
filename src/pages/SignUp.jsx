@@ -44,7 +44,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const goToSigninPage = () => {
-        navigate('/');
+        navigate('/signin');
     };
 
     const submitForm = async () => {
