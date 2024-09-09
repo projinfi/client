@@ -23,10 +23,12 @@ const ProtectedRoutes = ({ element: Component, ...rest }) => {
                     setIsAuthenticated(true);
                 } else {
                     setIsAuthenticated(false);
+                 
                 }
             } catch (err) {
                 console.log("Invalid user token");
                 setIsAuthenticated(false);
+               
             }
         };
 
@@ -37,7 +39,7 @@ const ProtectedRoutes = ({ element: Component, ...rest }) => {
         return <div>Loading...</div>; // You can display a loading spinner or some placeholder here
     }
 
-    return isAuthenticated ? <Component {...rest} /> : <Navigate to="/signin" />;
+    return isAuthenticated ? <Component {...rest} /> : <Navigate to="/" />;
 }
 
 export default ProtectedRoutes;

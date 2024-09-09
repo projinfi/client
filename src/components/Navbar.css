@@ -38,7 +38,11 @@
 }
 
 .navbar-content-left {
-    margin-right: 16px
+    margin-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
 }
 
 .navbar-shop-now {
