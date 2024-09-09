@@ -5,11 +5,11 @@ import {Swiper,SwiperSlide} from 'swiper/react';
 import slide1 from '../assets/swiperimg1.png';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
-
-
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { authStatus } from '../slices/authSlice';
 
 const Home = () => {
-
 
   return (
   

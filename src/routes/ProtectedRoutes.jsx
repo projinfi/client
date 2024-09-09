@@ -5,7 +5,7 @@ import { authStatus } from '../slices/authSlice';
 import { useDispatch } from 'react-redux';
 
 const ProtectedRoutes = ({ element: Component, ...rest }) => {
-    const navigate = useNavigate()
+   
     const [isAuthenticated, setIsAuthenticated] = useState(null); // null initially, true or false after verification
     const dispatch = useDispatch(); // Declare useDispatch here, not inside useEffect
 
