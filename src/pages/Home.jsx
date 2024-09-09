@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import '../pages/Home.css';
 import Navbar from '../components/Navbar';
 import {Swiper,SwiperSlide} from 'swiper/react';
@@ -7,7 +7,10 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 
 
+
 const Home = () => {
+
+
   return (
   
     <div className='home-page'>

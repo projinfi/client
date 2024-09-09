@@ -21,6 +21,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authStatus } from '../slices/authSlice';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   // Remove <BadgeProps>
@@ -28,9 +31,14 @@ const Navbar = () => {
   const userToken = localStorage.getItem('userToken');
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorE2, setAnchorE2] = useState(null);
+  const dispatch = useDispatch()
   const open = Boolean(anchorEl);
   const openE2 = Boolean(anchorE2);
   const navigate = useNavigate()
+
+  const Logged = useSelector((state) => state.auth)
+  console.log(Logged)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,8 +50,9 @@ const Navbar = () => {
     setAnchorE2(null);
   };
   const handleLogOut = () => {
-    setAnchorE2(null);
     localStorage.removeItem('userToken')
+    setAnchorE2(null);
+    dispatch(authStatus(false))
   }
   const handleLogin = () => {
     setAnchorE2(null);
@@ -53,6 +62,7 @@ const Navbar = () => {
     setAnchorE2(null);
     navigate("/signup")
   }
+  
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -79,7 +89,7 @@ const Navbar = () => {
         </div>
         <div className='navbar-content-left'>
 
-          {userToken ? ( <><div>
+          {Logged === "true" ? ( <><div>
 
 
 
