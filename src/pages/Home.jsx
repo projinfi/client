@@ -1,28 +1,22 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import '../pages/Home.css';
 import Navbar from '../components/Navbar';
-import {Swiper,SwiperSlide} from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import slide1 from '../assets/swiperimg1.png';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { authStatus } from '../slices/authSlice';
 
 const Home = () => {
 
   return (
-  
-    <div className='home-page'>
 
-   {/* total navbar height is 100px and 60px goes to the navbar offer height */}
+    <div className='home-page'>
+      {/* total navbar height is 100px and 60px goes to the navbar offer height */}
       <div className='navbar-section'>
         <Navbar />
       </div>
-      
       {/* margin top 100px */}
       <div className='home-content'>
-
         <div className='home-slider-space'>
           <Swiper
             spaceBetween={50}
@@ -36,15 +30,11 @@ const Home = () => {
             navigation={true}
             modules={[Autoplay, Pagination, Navigation]}
           >
-            <SwiperSlide><img className='swiper-slide-image' src={slide1}/></SwiperSlide>
-            <SwiperSlide><img className='swiper-slide-image' src={slide1}/></SwiperSlide>
-           
-          
+            <SwiperSlide><img className='swiper-slide-image' src={slide1} /></SwiperSlide>
+            <SwiperSlide><img className='swiper-slide-image' src={slide1} /></SwiperSlide>
           </Swiper>
         </div>
-
       </div>
-
     </div>
   )
 }

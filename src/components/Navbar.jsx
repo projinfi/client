@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import '../components/Navbar.css';
 import coupon from '../assets/coupon.png';
 import arrow from '../assets/arrow.png';
@@ -22,13 +22,15 @@ import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { authStatus } from '../slices/authSlice';
+import { setAuthStatus,setUserInfo } from '../slices/authSlice';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Navbar = () => {
   // Remove <BadgeProps>
 
   const userToken = localStorage.getItem('userToken');
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorE2, setAnchorE2] = useState(null);
   const dispatch = useDispatch()
@@ -37,6 +39,8 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const Logged = useSelector((state) => state.auth)
+  const username = useSelector((state)=>state.auth.userName)
+
   console.log(Logged)
 
   const handleClick = (event) => {
@@ -52,7 +56,9 @@ const Navbar = () => {
   const handleLogOut = () => {
     localStorage.removeItem('userToken')
     setAnchorE2(null);
-    dispatch(authStatus(false))
+    dispatch(setAuthStatus(false))
+    dispatch(setUserInfo({ userName: '', userEmail: '' }));
+    window.location.reload();
   }
   const handleLogin = () => {
     setAnchorE2(null);
@@ -72,6 +78,41 @@ const Navbar = () => {
       padding: '0 4px',
     },
   }));
+
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      try {
+        const response = await axios.post(
+          'https://server-orcin-delta.vercel.app/users/verifyUserToken',
+          { 'usertoken': userToken },
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        if (response.data) {
+          console.log(response.data)
+          dispatch(setAuthStatus("true"));
+          dispatch(setUserInfo({ userName: response.data.name , userEmail: response.data.email}));
+
+        } else {
+          dispatch(setAuthStatus("false"));
+          localStorage.removeItem('userToken')
+          dispatch(setUserInfo({ userName: '', userEmail: '' }));
+        }
+      } catch (err) {
+
+        console.log("Invalid user token");
+        dispatch(setAuthStatus("false"));
+        localStorage.removeItem('userToken')
+        dispatch(setUserInfo({ userName: '', userEmail: '' }));
+      }
+    };
+    verifyToken();
+  }, [])
+
 
   return (
     <div className='navbar-container'>
@@ -104,7 +145,7 @@ const Navbar = () => {
       aria-haspopup="true"
       aria-expanded={openE2 ? 'true' : undefined}
     >
-      <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+      <Avatar sx={{ width: 32, height: 32 }}>{username.charAt(0).toUpperCase()}</Avatar>
     </IconButton>
   </Tooltip>
 </Box>
@@ -146,7 +187,7 @@ const Navbar = () => {
   anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 >
   <MenuItem onClick={handleClose}>
-    <Avatar /> Profile
+    <Avatar /> {username}
   </MenuItem>
 
   <Divider />
@@ -166,7 +207,7 @@ const Navbar = () => {
        </div>
            <div>
            <IconButton sx={{ color: '#3c3c3c' }} aria-label="cart">
-             <StyledBadge badgeContent={1} color="primary">
+             <StyledBadge badgeContent={0} color="primary">
                <ShoppingCartIcon />
              </StyledBadge>
            </IconButton>

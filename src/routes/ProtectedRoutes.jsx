@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate} from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import axios from 'axios';
-import { authStatus } from '../slices/authSlice';
+import { setAuthStatus,setUserInfo} from '../slices/authSlice';
 import { useDispatch } from 'react-redux';
 
 const ProtectedRoutes = ({ element: Component, ...rest }) => {
@@ -25,16 +25,20 @@ const ProtectedRoutes = ({ element: Component, ...rest }) => {
                 );
                 if (response.data) {
                     setIsAuthenticated(true);
-                    dispatch(authStatus("true")); // Update the auth state in Redux
+                    dispatch(setAuthStatus("true")); 
+                    dispatch(setUserInfo({ userName: response.data.name, userEmail: response.data.email}));
+                    
                 } else {
                     setIsAuthenticated(false);
-                    dispatch(authStatus("false")); // Update the auth state in Redux
+                    dispatch(setAuthStatus("false")); 
+                    dispatch(setUserInfo({ userName: '', userEmail: '' }));
                 }
             } catch (err) {
         
                 console.log("Invalid user token");
                 setIsAuthenticated(false);
-                dispatch(authStatus("false")); // Ensure auth state is updated to false
+                dispatch(setAuthStatus("false"));
+                dispatch(setUserInfo({ userName: '', userEmail: '' }));
               
             }
         };
