@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import slide1 from '../assets/swiperimg1.png';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
+import ProductCard from '../components/ProductCard';
 
 const Home = () => {
 
@@ -17,6 +18,7 @@ const Home = () => {
       </div>
       {/* margin top 100px */}
       <div className='home-content'>
+
         <div className='home-slider-space'>
           <Swiper
             spaceBetween={50}
@@ -34,6 +36,20 @@ const Home = () => {
             <SwiperSlide><img className='swiper-slide-image' src={slide1} /></SwiperSlide>
           </Swiper>
         </div>
+
+
+       <div className='home-products-space'>
+        <div className='home-products-title'>Shop Our Latest</div>
+        <div className='products-cards-container'>
+          <ProductCard/>
+          <ProductCard/>
+          <ProductCard/>
+          <ProductCard/>
+          <ProductCard/>
+        </div>
+       </div>
+
+
       </div>
     </div>
   )

@@ -1,0 +1,36 @@
+.product-card{
+    background-color: rgb(143, 204, 204);
+    width: 100%;
+    max-width: 325px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+.product-details-container{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 0px;
+    background-color: #82d5ea;
+}
+.product-name{
+    font-size: 16px;
+    font-weight: 600;
+}
+.product-image-container{
+    width: 100%;;
+    height:auto;
+   
+}
+.product-image{
+    width: 100%;
+  height: auto;
+    background-size: cover;
+    background-position: center;
+}
+.product-name{
+    font-size: 18px;
+}
+.product-price{
+    font-size: 24px;
+}
