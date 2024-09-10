@@ -1,17 +1,21 @@
 .product-card{
-    background-color: rgb(143, 204, 204);
+    background-color: rgb(255, 255, 255);
     width: 100%;
     max-width: 325px;
     height: auto;
     display: flex;
     flex-direction: column;
+ 
+
+   
 }
 .product-details-container{
     display: flex;
     flex-direction: column;
     gap: 6px;
     padding: 10px 0px;
-    background-color: #82d5ea;
+    background-color: #ffffff;
+   
 }
 .product-name{
     font-size: 16px;
@@ -20,6 +24,8 @@
 .product-image-container{
     width: 100%;;
     height:auto;
+    position: relative;
+    overflow: hidden;
    
 }
 .product-image{
@@ -33,4 +39,23 @@
 }
 .product-price{
     font-size: 24px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+}
+.product-shop-button{
+    
+    /* background-color: rgb(208, 49, 49); */
+    background-color: rgb(39, 161, 232);
+    color: white;
+    width: 100%;
+    max-width: 100px;
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+   position: absolute;
+   bottom: 10px;
+   right: 10px;
+   cursor: pointer;
+
+    
 }

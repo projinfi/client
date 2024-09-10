@@ -6,8 +6,11 @@ import slide1 from '../assets/swiperimg1.png';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import ProductCard from '../components/ProductCard';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+
+  const name = useSelector((store)=>store.auth.userName)
 
   return (
 
@@ -41,6 +44,9 @@ const Home = () => {
        <div className='home-products-space'>
         <div className='home-products-title'>Shop Our Latest</div>
         <div className='products-cards-container'>
+          <ProductCard/>
+          <ProductCard/>
+          <ProductCard/>
           <ProductCard/>
           <ProductCard/>
           <ProductCard/>
