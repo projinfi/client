@@ -7,6 +7,7 @@ import SetNewPassword from './pages/SetNewPassword';
 import Home from './pages/Home';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import Navbar from './components/Navbar';
+import Cart from './pages/Cart';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/resetpassword' element={<ResetPass />} />
           <Route path='/users/verifyResetToken' element={<SetNewPassword />} />
-          {/* <Route path='/' element={<ProtectedRoutes element={Home} />} /> */}
+          {/* <Route path='/cart' element={<ProtectedRoutes element={Cart}/>}/> */}
+          <Route path='/cart' element={<Cart/>} />
           <Route path='/' element={<Home/>} />
         </Routes>
       </BrowserRouter>

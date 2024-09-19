@@ -68,8 +68,13 @@ const Navbar = () => {
     setAnchorE2(null);
     navigate("/signup")
   }
+  const handleCartClick = () => {
+    navigate('/cart')
+  }
+  const redirectHome = () => {
+    navigate('/')
+  }
   
-
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       right: -3,
@@ -125,8 +130,8 @@ const Navbar = () => {
       </div>
 
       <div className='navbar-content'>
-        <div className='navbar-content-right'>
-          <img src={Logo} />
+        <div onClick={redirectHome} className='navbar-content-right'>
+          <img className='navbar-cont-logo' src={Logo} />
         </div>
         <div className='navbar-content-left'>
 
@@ -206,9 +211,9 @@ const Navbar = () => {
 </Menu>
        </div>
            <div>
-           <IconButton sx={{ color: '#3c3c3c' }} aria-label="cart">
+           <IconButton onClick={handleCartClick}  sx={{ color: '#3c3c3c' }} aria-label="cart">
              <StyledBadge badgeContent={0} color="primary">
-               <ShoppingCartIcon />
+               <ShoppingCartIcon  />
              </StyledBadge>
            </IconButton>
          </div>
