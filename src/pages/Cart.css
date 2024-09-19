@@ -47,3 +47,19 @@
 .off-process{
     opacity: 0.3;
 }
+.cart-display-container{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.cart-display-left{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 50px 0px 0px;
+}
+.cart-display-right{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 50px 0px 0px;
+}

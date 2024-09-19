@@ -1,0 +1,21 @@
+.cart-table-space{
+    background-color: rgb(255, 255, 255);
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 650px;
+}
+td, th {
+    border: 1px solid #e7e3e3;
+    text-align: left;
+    padding: 12px;
+  }
+.subtotal-field{
+    font-weight: 600;
+}
