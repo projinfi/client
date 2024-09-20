@@ -1,0 +1,17 @@
+.product-quantity-btn {
+    background-color: gray;
+}
+
+.quantity-button-space {
+    background-color: rgb(213, 232, 232);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.button-partition {
+    padding: 4px;
+}
+.btn-plus,.btn-minus{
+    cursor: pointer;
+}

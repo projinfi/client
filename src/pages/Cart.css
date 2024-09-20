@@ -50,8 +50,9 @@
 .cart-display-container{
     background-color: rgb(255, 255, 255);
     width: 100%;
-    height: 100vh;
+
     display: flex;
+    gap: 22px;
 }
 .cart-display-left{
     background-color: rgb(255, 255, 255);

@@ -3,11 +3,11 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 20px;
+    padding:20px;
     border: 1px solid #e7e3e3;
     border-radius: 12px;
-    width: 100%;
-    max-width: 600px;
+  
+   
 }
 .cart-item-shipping{
     display: flex;
@@ -35,4 +35,7 @@
 }
 .total-amount-box{
     margin-top: 12px;
+}
+.cart-summary-title{
+    font-weight: 600;
 }

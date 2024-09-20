@@ -11,10 +11,14 @@ table{
     width: 100%;
     max-width: 650px;
 }
+th{
+ 
+}
 td, th {
-    border: 1px solid #e7e3e3;
+   
     text-align: left;
     padding: 12px;
+    border-bottom: 1px solid #e7e3e3;
   }
 .subtotal-field{
     font-weight: 600;
