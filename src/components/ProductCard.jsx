@@ -20,7 +20,7 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
 
         setAddQuantity(nextQuantity)
    
-        dispatch(addToReduxCart({ id, name, description, image, price, quantity ,order_quantity : nextQuantity}))
+        dispatch(addToReduxCart({ id, product_name:name, product_des:description, product_price:price, product_image:image, stock_quantity:quantity, order_quantity:nextQuantity}))
     }
 
     return (

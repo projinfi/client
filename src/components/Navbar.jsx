@@ -40,6 +40,7 @@ const Navbar = () => {
 
   const Logged = useSelector((state) => state.auth)
   const username = useSelector((state)=>state.auth.userName)
+  const cartQuantity = useSelector((state)=>state.cart.length)
 
   console.log(Logged)
 
@@ -212,7 +213,7 @@ const Navbar = () => {
        </div>
            <div>
            <IconButton onClick={handleCartClick}  sx={{ color: '#3c3c3c' }} aria-label="cart">
-             <StyledBadge badgeContent={0} color="primary">
+             <StyledBadge badgeContent={cartQuantity} color="primary">
                <ShoppingCartIcon  />
              </StyledBadge>
            </IconButton>
