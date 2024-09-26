@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../pages/Home.css';
 import Navbar from '../components/Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,33 +8,37 @@ import 'swiper/css';
 import ProductCard from '../components/ProductCard';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import ProductSkeleton from '../skeletons/ProductSkeleton';
 
 
 const Home = () => {
 
-  const name = useSelector((store)=>store.auth.userName)
-  const [products,setProducts] = useState([{
+  const name = useSelector((store) => store.auth.userName)
+  const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([{
     id: null,
-    product_name : "",
-    product_des : "",
-    product_price : "",
-    stock_quantity : null,
-    product_image : "",
-  
-}])
+    product_name: "",
+    product_des: "",
+    product_price: "",
+    stock_quantity: null,
+    product_image: "",
 
-  useEffect(()=>{
+  }])
 
-    const getProductData = async() => {
-     try{
-      const productData = await axios.get("https://server-orcin-delta.vercel.app/products/allProducts",{headers:{"Content-Type":"application/json"}})
-      setProducts(productData.data)
-     }catch(err){
-      console.log("error in fetching product data",err)
-     }
+  useEffect(() => {
+
+    const getProductData = async () => {
+      try {
+        const productData = await axios.get("https://server-orcin-delta.vercel.app/products/allProducts", { headers: { "Content-Type": "application/json" } })
+        setProducts(productData.data)
+        setLoading(false)
+      } catch (err) {
+        console.log("error in fetching product data", err)
+        setLoading(true)
+      }
     }
-  getProductData()
-  },[])
+    getProductData()
+  }, [])
 
   return (
 
@@ -67,24 +71,29 @@ const Home = () => {
 
         <div className='home-products-space'>
           <div className='home-products-title'>Shop Our Latest</div>
-          <div className='products-cards-container'>
+
+          {loading ? (<div className='products-cards-container'>
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+          </div>) : (<div className='products-cards-container'>
             {products.map((data) => (
               <ProductCard
                 id={data.id}
-                name={data.product_name} 
+                name={data.product_name}
                 description={data.product_des}
                 image={data.product_image}
                 price={data.product_price}
                 quantity={data.stock_quantity}
-                />
+              />
             ))}
-          </div>
+          </div>)}
         </div>
-
-
       </div>
     </div>
   )
 }
 
 export default Home
+
