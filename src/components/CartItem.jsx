@@ -9,6 +9,7 @@ const CartItem = ({data}) => {
     const dispatch = useDispatch()
 
     const removeFromCart = (data) => {
+        const id = data.id;
      dispatch(removeReduxCart({id:data.id}))
     }
 
