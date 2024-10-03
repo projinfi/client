@@ -59,6 +59,7 @@ const Navbar = () => {
     setAnchorE2(null);
     dispatch(setAuthStatus(false))
     dispatch(setUserInfo({ userName: '', userEmail: '' }));
+    localStorage.removeItem("userId")
     window.location.reload();
   }
   const handleLogin = () => {
