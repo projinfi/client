@@ -51,6 +51,7 @@ const SignIn = () => {
             if(res.data && res.data.name){
                 console.log('success', res);
                 localStorage.setItem('userToken',res.data.usertoken)
+                localStorage.setItem('userId',res.data.id)
                 setSuccessMsg(`welcome ${res.data.name}`)
                 navigate('/')
             }else{
