@@ -9,6 +9,7 @@ const CartTable = () => {
     const reduxCartData = useSelector((state) => state.cart);
     const [cartItems, setCartItems] = useState([]);
     const [cartData, setCartData] = useState([]);
+    const user_id = localStorage.getItem("userId")
 
     // Update cartItems only when reduxCartData changes
     useEffect(() => {
@@ -18,7 +19,7 @@ const CartTable = () => {
     const getCartData = async () => {
         try {
             const response = await axios.post("https://server-orcin-delta.vercel.app/cart/getCartItems", {
-                user_id: 1
+                user_id: user_id
             }, {
                 headers: {
                     "Content-Type": "application/json"
