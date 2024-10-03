@@ -3,15 +3,37 @@ import '../components/CartTable.css';
 import CartItem from './CartItem';
 import QuantityButton from './QuantityButton';
 import { useSelector } from 'react-redux';
+import axios from 'axios'
 
 const CartTable = () => {
     const reduxCartData = useSelector((state) => state.cart);
     const [cartItems, setCartItems] = useState([]);
+    const [cartData, setCartData] = useState([]);
 
     // Update cartItems only when reduxCartData changes
     useEffect(() => {
         setCartItems(reduxCartData);
     }, [reduxCartData]);
+
+    const getCartData = async () => {
+        try {
+            const response = await axios.post("https://server-orcin-delta.vercel.app/cart/getCartItems", {
+                user_id: 1
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            setCartData(response.data); // Set the cart data from response
+            console.log("Fetched cart data:", response.data); // Log the fetched data directly
+        } catch (err) {
+            console.log("Error in getting cart data:", err);
+        }
+    };
+
+    useEffect(() => {
+        getCartData();
+    }, []);
 
     return (
         <div className='cart-table-space'>
@@ -25,7 +47,7 @@ const CartTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cartItems.map((data) => (
+                    {cartData.map((data) => (
                         <tr key={data.id}>
                             <td><CartItem data={data}/></td>
                             <td><QuantityButton data={data} /></td>
