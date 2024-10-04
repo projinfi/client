@@ -80,7 +80,7 @@ const Home = () => {
           </div>) : (<div className='products-cards-container'>
             {products.map((data) => (
               <ProductCard
-                id={data.id}
+                product_id={data.id}
                 name={data.product_name}
                 description={data.product_des}
                 image={data.product_image}

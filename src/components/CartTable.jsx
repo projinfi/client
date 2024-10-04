@@ -3,18 +3,28 @@ import '../components/CartTable.css';
 import CartItem from './CartItem';
 import QuantityButton from './QuantityButton';
 import { useSelector } from 'react-redux';
-import axios from 'axios'
+import axios from 'axios';
+import { fetchCartData } from "../slices/cartSlice";
+import { useDispatch } from 'react-redux';
 
 const CartTable = () => {
     const reduxCartData = useSelector((state) => state.cart);
     const [cartItems, setCartItems] = useState([]);
     const [cartData, setCartData] = useState([]);
+    const dispatch = useDispatch();
     const user_id = localStorage.getItem("userId")
+   
 
     // Update cartItems only when reduxCartData changes
     useEffect(() => {
         setCartItems(reduxCartData);
     }, [reduxCartData]);
+
+    useEffect(() => {
+        if (user_id) {
+            dispatch(fetchCartData(user_id));
+        }
+    }, [user_id, dispatch]);
 
     const getCartData = async () => {
         try {
@@ -48,8 +58,8 @@ const CartTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cartData.map((data) => (
-                        <tr key={data.id}>
+                    {cartItems.map((data) => (
+                        <tr key={data.product_id}>
                             <td><CartItem data={data}/></td>
                             <td><QuantityButton data={data} /></td>
                             <td>₹{data.product_price}</td>

@@ -8,12 +8,13 @@ const QuantityButton = ({data}) => {
 
   const dispatch = useDispatch()
 
-  const incrementValue = () => {
-   dispatch(incrementQuantity({id:data.id}))
+  const incrementValue = (data) => {
+    
+   dispatch(incrementQuantity({product_id:data.product_id}))
   }
 
-  const decrementValue = () => {
-    dispatch(decrementQuantity({id:data.id}))
+  const decrementValue = (data) => {
+    dispatch(decrementQuantity({product_id:data.product_id}))
    }
 
   return (

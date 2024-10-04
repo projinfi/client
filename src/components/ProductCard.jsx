@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 
-const ProductCard = ({ id, name, description, image, price, quantity }) => {
+const ProductCard = ({ product_id, name, description, image, price, quantity }) => {
 
     const [addQuantity,setAddQuantity] = useState(0)
     const dispatch = useDispatch()
@@ -18,23 +18,23 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
 
   console.log(userId)
 
-    const addToCart = async(id, name, description, image, price, quantity) => {
+    const addToCart = async(product_id, name, description, image, price, quantity) => {
 
         
        
         try {
             const nextQuantity = addQuantity + 1;
 
-            console.log(id, name, description, image, price, quantity)
+            console.log(product_id, name, description, image, price, quantity)
 
             setAddQuantity(nextQuantity)
 
-            dispatch(addToReduxCart({ id, product_name: name, product_des: description, product_price: price, product_image: image, stock_quantity: quantity, order_quantity: nextQuantity }))
+            dispatch(addToReduxCart({ product_id, product_name: name, product_des: description, product_price: price, product_image: image, stock_quantity: quantity, order_quantity: nextQuantity }))
 
             const cartProduct = await axios.post("https://server-orcin-delta.vercel.app/cart/addToCart",
                 {
                     "user_id": userId,
-                    "product_id": id,
+                    "product_id": product_id,
                     "order_quantity": 1
                 }
                 , {
@@ -43,7 +43,7 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
                     }
                 })
             console.log(cartProduct)
-            navigate("/cart")
+          
         } catch (err) {
             console.log("cannot add product to cart", err)
         }
@@ -52,11 +52,11 @@ const ProductCard = ({ id, name, description, image, price, quantity }) => {
     }
 
     return (
-        <div id={id} className='product-card'>
+        <div id={product_id} className='product-card'>
             <div className='product-image-container'>
                 {/* 325*305 */}
                 <img className='product-image' src={image} />
-                <div className='product-shop-button' onClick={() => {addToCart(id, name, description, image, price, quantity)}}>Add to cart</div>
+                <div className='product-shop-button' onClick={() => {addToCart(product_id, name, description, image, price, quantity)}}>Add to cart</div>
             </div>
             <div className='product-details-container'>
                 <div className='product-rating'>
