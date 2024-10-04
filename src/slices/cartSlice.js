@@ -22,7 +22,6 @@ export const fetchCartData = createAsyncThunk("cart/fetchCartData", async (user_
 export const updateProductQuantity = createAsyncThunk(
     "cart/updateProductQuantity",
     async ({ product_id, order_quantity }) => {
-        console.log("updated cart data",product_id,order_quantity)
         try {
             const response = await axios.post("https://server-orcin-delta.vercel.app/cart/updateProductQuantity", {
                 product_quantity: order_quantity,
@@ -32,10 +31,30 @@ export const updateProductQuantity = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             });
-            console.log("Updated quantity on server:", response.data);
-            return response.data; // Return the updated product data from the server
+            return { product_id, order_quantity };
         } catch (error) {
             console.log("Cannot update quantity", error);
+            throw error;
+        }
+    }
+);
+
+// Thunk to remove item from the server
+export const removeFromCart = createAsyncThunk(
+    "cart/removeCartItem",
+    async (product_id) => {
+        console.log({product_id})
+        try {
+            await axios.post("https://server-orcin-delta.vercel.app/cart/removeCartItem", {
+                product_id: product_id,
+            }, {
+                headers: {
+                    'Content-Type': "application/json",
+                },
+            });
+            return product_id;
+        } catch (error) {
+            console.log("Cannot delete from cart", error);
             throw error;
         }
     }
@@ -50,7 +69,6 @@ export const cartSlice = createSlice({
             const existingProduct = state.find((item) => item.product_id === product_id);
             if (existingProduct) {
                 existingProduct.order_quantity += order_quantity;
-                console.log(`Updated quantity of product ${product_id}: ${existingProduct.order_quantity}`);
             } else {
                 state.push({
                     product_id,
@@ -61,12 +79,10 @@ export const cartSlice = createSlice({
                     stock_quantity,
                     order_quantity,
                 });
-                console.log(`Added new product ${product_id} with quantity: ${order_quantity}`);
             }
         },
         removeReduxCart(state, action) {
             const { product_id } = action.payload;
-            console.log(`Removing product ${product_id} from cart`);
             return state.filter((item) => item.product_id !== product_id);
         },
         incrementQuantity(state, action) {
@@ -74,7 +90,6 @@ export const cartSlice = createSlice({
             const product = state.find((item) => item.product_id === product_id);
             if (product) {
                 product.order_quantity += 1;
-                console.log(`Incremented quantity of product ${product_id}: ${product.order_quantity}`);
             }
         },
         decrementQuantity(state, action) {
@@ -82,24 +97,33 @@ export const cartSlice = createSlice({
             const product = state.find((item) => item.product_id === product_id);
             if (product && product.order_quantity > 1) {
                 product.order_quantity -= 1;
-                console.log(`Decremented quantity of product ${product_id}: ${product.order_quantity}`);
             }
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCartData.fulfilled, (state, action) => {
-                console.log("Fetched cart data:", action.payload);
-                return action.payload.map((item) => ({ ...item })); // Merge and return fetched data as new state
+                return action.payload.map((item) => ({ ...item }));
             })
             .addCase(updateProductQuantity.fulfilled, (state, action) => {
-                console.log("Updated product quantity on server:", action.payload);
+                const { product_id, order_quantity } = action.payload;
+                console.log(product_id)
+                const product = state.find((item) => item.product_id === product_id);
+                if (product) {
+                    product.order_quantity = order_quantity;
+                }
+            })
+            .addCase(removeFromCart.fulfilled, (state, action) => {
+                const product_id = action.payload;
+                console.log(product_id)
+                return state.filter((item) => item.product_id !== product_id);
             });
     },
 });
 
 export const { addToReduxCart, removeReduxCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
+
 
 
 
