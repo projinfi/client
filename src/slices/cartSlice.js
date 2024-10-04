@@ -18,6 +18,29 @@ export const fetchCartData = createAsyncThunk("cart/fetchCartData", async (user_
     }
 });
 
+// Thunk to update product quantity on the server
+export const updateProductQuantity = createAsyncThunk(
+    "cart/updateProductQuantity",
+    async ({ product_id, order_quantity }) => {
+        console.log("updated cart data",product_id,order_quantity)
+        try {
+            const response = await axios.post("https://server-orcin-delta.vercel.app/cart/updateProductQuantity", {
+                product_quantity: order_quantity,
+                product_id: product_id,
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log("Updated quantity on server:", response.data);
+            return response.data; // Return the updated product data from the server
+        } catch (error) {
+            console.log("Cannot update quantity", error);
+            throw error;
+        }
+    }
+);
+
 export const cartSlice = createSlice({
     name: "cart",
     initialState: [],
@@ -64,14 +87,19 @@ export const cartSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchCartData.fulfilled, (state, action) => {
-            console.log('Fetched cart data:', action.payload);
-            return action.payload.map(item => ({ ...item })); // Merge and return fetched data as new state
-        });
+        builder
+            .addCase(fetchCartData.fulfilled, (state, action) => {
+                console.log("Fetched cart data:", action.payload);
+                return action.payload.map((item) => ({ ...item })); // Merge and return fetched data as new state
+            })
+            .addCase(updateProductQuantity.fulfilled, (state, action) => {
+                console.log("Updated product quantity on server:", action.payload);
+            });
     },
 });
 
 export const { addToReduxCart, removeReduxCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
+
 
 
