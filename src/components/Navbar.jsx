@@ -40,7 +40,7 @@ const Navbar = () => {
 
   const Logged = useSelector((state) => state.auth)
   const username = useSelector((state)=>state.auth.userName)
-  const cartQuantity = useSelector((state)=>state.cart.length)
+  const cartQuantity = useSelector((state)=>state.cart.items.length)
 
   console.log(Logged)
 
