@@ -9,6 +9,7 @@ import ProductCard from '../components/ProductCard';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import ProductSkeleton from '../skeletons/ProductSkeleton';
+import mobslide from '../assets/mobbanner.png'
 
 
 const Home = () => {
@@ -63,8 +64,13 @@ const Home = () => {
             navigation={true}
             modules={[Autoplay, Pagination, Navigation]}
           >
-            <SwiperSlide><img className='swiper-slide-image' src={slide1} /></SwiperSlide>
-            <SwiperSlide><img className='swiper-slide-image' src={slide1} /></SwiperSlide>
+            <SwiperSlide><img className='swiper-slide-image' src={slide1} />
+            <img className='swiper-mobile-image' src={mobslide} />
+            </SwiperSlide>
+            <SwiperSlide><img className='swiper-slide-image' src={slide1} />
+            <img className='swiper-mobile-image' src={mobslide} />
+            </SwiperSlide>
+      
           </Swiper>
         </div>
 

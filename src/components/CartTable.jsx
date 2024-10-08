@@ -8,13 +8,13 @@ import { fetchCartData } from "../slices/cartSlice";
 import { useDispatch } from 'react-redux';
 
 const CartTable = () => {
-    const reduxCartData = useSelector((state) => state.cart);
+    const reduxCartData = useSelector((state) => state.cart.items);
     const [cartItems, setCartItems] = useState([]);
     const [cartData, setCartData] = useState([]);
     const dispatch = useDispatch();
     const user_id = localStorage.getItem("userId")
    
-
+console.log(reduxCartData.items)
     // Update cartItems only when reduxCartData changes
     useEffect(() => {
         setCartItems(reduxCartData);
@@ -53,7 +53,7 @@ const CartTable = () => {
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th className='price-title-field'>Price</th>
                         <th>Subtotal</th>
                     </tr>
                 </thead>
@@ -62,7 +62,7 @@ const CartTable = () => {
                         <tr key={data.product_id}>
                             <td><CartItem data={data}/></td>
                             <td><QuantityButton data={data} /></td>
-                            <td>₹{data.product_price}</td>
+                            <td className='price-field'>₹{data.product_price}</td>
                             <td className='subtotal-field'>₹ {data.product_price * data.order_quantity}</td>
                         </tr>
                     ))}

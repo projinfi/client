@@ -125,7 +125,7 @@ const Navbar = () => {
     <div className='navbar-container'>
       {/* total navbar height is 100px and 60px goes to the navbar offer height */}
       <div className='navbar-offer-content'>
-        <div className='copoun-icon'><img src={coupon} /></div>
+        <div className='copoun-icon'><img className='coupon-logo' src={coupon} /></div>
         <div className='navbar-offer-text'>30% off storewide -- Limited time!</div>
         <div className='navbar-shopnow-txt'>Shop Now</div>
         <div className='navbar-shopnow-arrow'><img src={arrow} /></div>

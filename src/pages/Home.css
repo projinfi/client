@@ -13,6 +13,10 @@
 .swiper-slide-image{
     width: 100%;
 }
+.swiper-mobile-image{
+    width: 100%;
+    display: none;
+}
 .home-products-space{
     background-color: rgb(255, 255, 255);
     height: 100%;
@@ -28,4 +32,14 @@
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
+}
+
+@media screen and (max-width:600px) and (min-width:0px) {
+    .swiper-slide-image{
+        width: 100%;
+        display: none;
+    }
+    .swiper-mobile-image{
+        display: flex;
+    }
 }

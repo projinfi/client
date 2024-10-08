@@ -39,3 +39,12 @@
 .cart-summary-title{
     font-weight: 600;
 }
+
+@media screen and (max-width:900px) and (min-width:0px) {
+.cart-display-right{
+    padding: 0px;
+}
+.cart-summary-container{
+    border-radius: 0px;
+}
+  }

@@ -18,7 +18,7 @@ const Cart = () => {
         <div className='cart-navigation-space'>
           <div className='cart-navigation-btns'>
             <div className='navigation-content on-process'>
-              <div className='navigation-count-btn'>1</div>
+              <div className='navigation-count-btn on-process-bg'>1</div>
               <div className='navigation-btn-text'>Shopping Cart</div>
             </div>
 

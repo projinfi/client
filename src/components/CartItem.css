@@ -36,3 +36,23 @@ align-items: center;
 .cart-item-cancel{
     cursor: pointer;
 }
+
+
+
+@media screen and (max-width:900px) and (min-width:0px) {
+  .cart-item-box{
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+flex-direction: column;
+  }
+  .cart-item-right {
+ justify-content: flex-start;
+ align-items: flex-start;
+ padding: 10px 0px;
+}
+.coupon-logo{
+    width: 16px;
+    height: 16px;
+}
+}

@@ -62,15 +62,18 @@ export const removeFromCart = createAsyncThunk(
 
 export const cartSlice = createSlice({
     name: "cart",
-    initialState: [],
+    initialState: {
+        items: [],
+        totalAmount: 0, // New state to track total amount
+    },
     reducers: {
         addToReduxCart(state, action) {
             const { product_id, product_name, product_des, product_price, stock_quantity, product_image, order_quantity } = action.payload;
-            const existingProduct = state.find((item) => item.product_id === product_id);
+            const existingProduct = state.items.find((item) => item.product_id === product_id);
             if (existingProduct) {
                 existingProduct.order_quantity += order_quantity;
             } else {
-                state.push({
+                state.items.push({
                     product_id,
                     product_name,
                     product_image,
@@ -80,49 +83,60 @@ export const cartSlice = createSlice({
                     order_quantity,
                 });
             }
+            state.totalAmount = calculateTotalAmount(state.items);
         },
         removeReduxCart(state, action) {
             const { product_id } = action.payload;
-            return state.filter((item) => item.product_id !== product_id);
+            state.items = state.items.filter((item) => item.product_id !== product_id);
+            state.totalAmount = calculateTotalAmount(state.items);
         },
         incrementQuantity(state, action) {
             const { product_id } = action.payload;
-            const product = state.find((item) => item.product_id === product_id);
+            const product = state.items.find((item) => item.product_id === product_id);
             if (product) {
                 product.order_quantity += 1;
             }
+            state.totalAmount = calculateTotalAmount(state.items);
         },
         decrementQuantity(state, action) {
             const { product_id } = action.payload;
-            const product = state.find((item) => item.product_id === product_id);
+            const product = state.items.find((item) => item.product_id === product_id);
             if (product && product.order_quantity > 1) {
                 product.order_quantity -= 1;
             }
+            state.totalAmount = calculateTotalAmount(state.items);
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCartData.fulfilled, (state, action) => {
-                return action.payload.map((item) => ({ ...item }));
+                state.items = action.payload.map((item) => ({ ...item }));
+                state.totalAmount = calculateTotalAmount(state.items);
             })
             .addCase(updateProductQuantity.fulfilled, (state, action) => {
                 const { product_id, order_quantity } = action.payload;
-                console.log(product_id)
-                const product = state.find((item) => item.product_id === product_id);
+                const product = state.items.find((item) => item.product_id === product_id);
                 if (product) {
                     product.order_quantity = order_quantity;
                 }
+                state.totalAmount = calculateTotalAmount(state.items);
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 const product_id = action.payload;
-                console.log(product_id)
-                return state.filter((item) => item.product_id !== product_id);
+                state.items = state.items.filter((item) => item.product_id !== product_id);
+                state.totalAmount = calculateTotalAmount(state.items);
             });
     },
 });
 
+// Helper function to calculate total amount
+const calculateTotalAmount = (items) => {
+    return items.reduce((total, item) => total + item.product_price * item.order_quantity, 0);
+};
+
 export const { addToReduxCart, removeReduxCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
+
 
 
 
