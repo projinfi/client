@@ -1,0 +1,47 @@
+.please-login-container{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+ color: rgb(0, 0, 0);
+    top: 0;
+    left: 0;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.please-login-content{
+    background-color: rgb(255, 255, 255);
+    padding: 20px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    border-radius: 12px;
+}
+.please-login-img{
+    width: 100%;
+    max-width: 200px;
+    height: 100px;
+}
+.please-login-text{
+    font-size: 28px;
+    text-align: center;
+}
+.please-login-btn{
+    color: rgb(19, 100, 192);
+}
+.close-icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    margin: 8px;
+    cursor: pointer;
+}
