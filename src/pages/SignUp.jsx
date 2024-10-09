@@ -63,6 +63,7 @@ const SignUp = () => {
                 localStorage.setItem('userToken',response.data.usertoken)
                 setIsLoading(false)
                 console.log('success', response)
+                navigate("/")
             }else{
                 setResMsg('user already exists :(')
             }
