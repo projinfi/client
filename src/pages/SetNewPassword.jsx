@@ -71,8 +71,8 @@ const SetNewPassword = () => {
             });
           
             navigate('/');
-            localStorage.setItem('userToken',response.data.response.usertoken)
-            console.log("rest pass data",response.data.response.usertoken)
+            localStorage.setItem('userToken',data.data.response.usertoken)
+            console.log("rest pass data",data.data.response.usertoken)
             console.log("rrrr")
         } catch (err) {
             console.log('Error resetting password', err);
