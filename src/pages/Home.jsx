@@ -9,11 +9,15 @@ import ProductCard from '../components/ProductCard';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import ProductSkeleton from '../skeletons/ProductSkeleton';
-import mobslide from '../assets/mobbanner.png'
+import mobslide from '../assets/mobbanner.png';
+import { useDispatch } from 'react-redux';
+import { fetchCartData } from '../slices/cartSlice';
 
 
 const Home = () => {
 
+  const user_id = localStorage.getItem("userId")
+  const dispatch = useDispatch()
   const name = useSelector((store) => store.auth.userName)
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([{
@@ -27,6 +31,8 @@ const Home = () => {
   }])
 
   useEffect(() => {
+    
+    dispatch(fetchCartData(user_id))
 
     const getProductData = async () => {
       try {
