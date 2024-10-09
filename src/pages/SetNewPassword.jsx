@@ -64,11 +64,12 @@ const SetNewPassword = () => {
         }
 
         try {
-            await axios.post('https://server-orcin-delta.vercel.app/users/updatePassword', { token, newPassword }, {
+          const data =  await axios.post('https://server-orcin-delta.vercel.app/users/updatePassword', { token, newPassword }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
+            console.log("rest pass data",data)
             navigate('/');
         } catch (err) {
             console.log('Error resetting password', err);

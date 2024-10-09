@@ -31,7 +31,7 @@
     height: 100px;
 }
 .please-login-text{
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
 }
 .please-login-btn{
@@ -44,4 +44,12 @@
     width: 25px;
     margin: 8px;
     cursor: pointer;
+}
+@media screen and (max-width:600px) and (min-width:0px) {
+   .please-login-text{
+    font-size: 18px;
+   } 
+   .please-login-img {
+    max-width: 100px;
+}
 }
