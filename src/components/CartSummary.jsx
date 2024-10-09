@@ -16,7 +16,6 @@ const CartSummary = () => {
             <input type='radio' id='freeShipping'/>
             <label className='shipping-label' for="freeShipping">Free Shipping</label>
            </div>
-           <div className='cart-shipping-price'>₹ 40</div>
         </div>
         <div className='cart-item-shipping'>
            <div className='cart-shipping-title'>

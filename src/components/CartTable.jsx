@@ -53,8 +53,7 @@ console.log(reduxCartData.items)
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
-                        <th className='price-title-field'>Price</th>
-                        <th>Subtotal</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +61,7 @@ console.log(reduxCartData.items)
                         <tr key={data.product_id}>
                             <td><CartItem data={data}/></td>
                             <td><QuantityButton data={data} /></td>
-                            <td className='price-field'>₹{data.product_price}</td>
+                          
                             <td className='subtotal-field'>₹ {data.product_price * data.order_quantity}</td>
                         </tr>
                     ))}

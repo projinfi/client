@@ -4,9 +4,13 @@ import Navbar from '../components/Navbar';
 import CartTable from '../components/CartTable';
 import CartItem from '../components/CartItem';
 import CartSummary from '../components/CartSummary';
-
+import EmptyCart from '../components/EmptyCart';
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
+
+  const cartCount = useSelector((state)=>state.cart.items.length)
+
   return (
    <div className='page'>
      <div className='navbar-section'>
@@ -15,7 +19,7 @@ const Cart = () => {
       <div className='content'>
         <div className='cart-title'>Cart</div>
 
-        <div className='cart-navigation-space'>
+        {cartCount >= 1 ? (<><div className='cart-navigation-space'>
           <div className='cart-navigation-btns'>
             <div className='navigation-content on-process'>
               <div className='navigation-count-btn on-process-bg'>1</div>
@@ -41,7 +45,11 @@ const Cart = () => {
           <div className='cart-display-right'>
            <CartSummary/>
           </div>
-        </div>
+        </div></>):(  <EmptyCart/>)}
+
+        
+
+      
 
       </div>
    </div>

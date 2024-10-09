@@ -42,8 +42,7 @@
     font-weight: 500;
     color: rgb(0, 0, 0);
 }
-.product-shop-button{
-    
+.product-shop-button{  
     /* background-color: rgb(208, 49, 49); */
     background-color: rgb(39, 161, 232);
     color: white;
@@ -56,6 +55,22 @@
    bottom: 10px;
    right: 10px;
    cursor: pointer;
+}
 
-    
+@media screen and (max-width:600px) and (min-width:0px) {
+    .product-card{
+        max-width: 170px;
+    }
+    .product-name{
+        font-size: 14px;
+    }
+    .product-price{
+        font-size: 14px;
+    }
+    .product-shop-button {
+        /* background-color: rgb(208, 49, 49); */
+        max-width: 90px;
+        padding: 6px 4px;
+        font-size: 14px;
+    }
 }
