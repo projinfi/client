@@ -69,8 +69,10 @@ const SetNewPassword = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log("rest pass data",data)
+          
             navigate('/');
+            console.log("rest pass data",data)
+            console.log("rrrr")
         } catch (err) {
             console.log('Error resetting password', err);
             setError('Failed to reset password');
