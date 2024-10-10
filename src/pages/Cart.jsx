@@ -7,7 +7,8 @@ import CartSummary from '../components/CartSummary';
 import EmptyCart from '../components/EmptyCart';
 import { useSelector,useDispatch} from 'react-redux';
 import { fetchCartData } from '../slices/cartSlice';
-import loadingCart from '../assets/loadingCat.gif'
+import LoadingCat from '../components/LoadingCat';
+
 
 const Cart = () => {
 
@@ -35,7 +36,7 @@ const Cart = () => {
       <div className='content'>
         <div className='cart-title'>Cart</div>
 
-        { Loading ? (<div className='loading-cat'><img className='loading-cat-img' src={loadingCart}/></div>)  : cartCount > 0 ? (<><div className='cart-navigation-space'>
+        { Loading ? (<LoadingCat/>)  : cartCount > 0 ? (<><div className='cart-navigation-space'>
           <div className='cart-navigation-btns'>
             <div className='navigation-content on-process'>
               <div className='navigation-count-btn on-process-bg'>1</div>
