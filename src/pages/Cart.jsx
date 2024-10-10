@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../pages/Cart.css';
 import Navbar from '../components/Navbar';
 import CartTable from '../components/CartTable';
 import CartItem from '../components/CartItem';
 import CartSummary from '../components/CartSummary';
 import EmptyCart from '../components/EmptyCart';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
+import { fetchCartData } from '../slices/cartSlice';
+import loadingCart from '../assets/loadingCat.gif'
 
 const Cart = () => {
 
+  const user_id = localStorage.getItem("userId")
+  const dispatch = useDispatch()
   const cartCount = useSelector((state)=>state.cart.items.length)
+  console.log(cartCount)
+
+  const [Loading,setLoading] = useState(true)
+
+  useEffect(()=>{
+ 
+    const fetchData = async() => {
+      await dispatch(fetchCartData(user_id))
+      setLoading(false)
+    }
+    fetchData()
+  },[dispatch,user_id])
 
   return (
    <div className='page'>
@@ -19,7 +35,7 @@ const Cart = () => {
       <div className='content'>
         <div className='cart-title'>Cart</div>
 
-        {cartCount >= 1 ? (<><div className='cart-navigation-space'>
+        { Loading ? (<div className='loading-cat'><img className='loading-cat-img' src={loadingCart}/></div>)  : cartCount > 0 ? (<><div className='cart-navigation-space'>
           <div className='cart-navigation-btns'>
             <div className='navigation-content on-process'>
               <div className='navigation-count-btn on-process-bg'>1</div>
@@ -46,11 +62,6 @@ const Cart = () => {
            <CartSummary/>
           </div>
         </div></>):(  <EmptyCart/>)}
-
-        
-
-      
-
       </div>
    </div>
   )
