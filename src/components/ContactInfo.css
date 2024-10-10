@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box; /* Ensure width includes padding and border */
+  }
+  
+  .info-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border: 1px solid rgb(203, 203, 203);
+    border-radius: 12px;
+    max-width: 680px;
+    padding: 32px 18px;
+  }
+  
+  .info-title {
+    font-size: 22px;
+    font-weight: 500;
+  }
+  
+  .info-first-lastname {
+    display: flex;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .info-field-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .info-input {
+    width: 100%;
+  }
+  .info-input-field:focus{
+    outline: none;
+  }
+  .info-input-field {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .info-first-name {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  /* Add media query for smaller screens */
+  @media (max-width: 600px) {
+    .info-first-lastname {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+  
