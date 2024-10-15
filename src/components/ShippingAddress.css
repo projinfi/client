@@ -1,0 +1,6 @@
+@media screen and (max-width:800px) and (min-width:0px) {
+   .info-box{
+    border-radius: 0px;
+    border: 0px;
+   }
+  }

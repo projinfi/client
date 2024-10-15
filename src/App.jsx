@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import Navbar from './components/Navbar';
 import Cart from './pages/Cart';
+import Settings from './pages/Settings';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/users/verifyResetToken' element={<SetNewPassword />} />
           {/* <Route path='/cart' element={<ProtectedRoutes element={Cart}/>}/> */}
           <Route path='/cart' element={<Cart/>} />
+          <Route path='/settings' element={<Settings/>} />
           <Route path='/' element={<Home/>} />
         </Routes>
       </BrowserRouter>

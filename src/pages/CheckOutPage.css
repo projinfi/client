@@ -1,6 +1,5 @@
 .checkout-page{
     background-color: rgb(208, 205, 201);
-    height: 50vh;
     width: 100%;
 }
 .checkout-page-content{
@@ -23,4 +22,34 @@ width: 100%;
     background-color: rgb(255, 255, 255);
   width: 100%;
     height: 100%;
+}
+.checkout-btn-space{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    gap: 12px;
+   justify-content: flex-end;
+   padding: 10px 16px;
+}
+.checkout-next-btn{
+    padding: 10px;
+    cursor: pointer;
+    background-color: #377DFF;
+    color: white;
+    border-radius: 6px;
+}
+.checkout-prev-btn{
+    padding: 10px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+}
+@media screen and (max-width:800px) and (min-width:0px) {
+  .checkout-page-content{
+    display: flex;
+    flex-direction: column;
+  }
+  .checkout-page-left{
+    order: 2;
+  }
 }

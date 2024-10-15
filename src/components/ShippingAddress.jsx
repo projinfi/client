@@ -23,6 +23,18 @@ const ShippingAddress = () => {
                   <input className='info-input-field' placeholder='Your Email' />
               </div>
           </div>
+          <div className='info-field-box'>
+              <div className='info-name-text'>EMAIL*</div>
+              <div className='info-input'>
+                  <input className='info-input-field' placeholder='Your Email' />
+              </div>
+          </div>
+          <div className='info-field-box'>
+              <div className='info-name-text'>PHONE *</div>
+              <div className='info-input'>
+                  <input className='info-input-field' placeholder='Your Email' />
+              </div>
+          </div>
           <div className='info-first-lastname'>
             <div className='info-first-name'>
                 <div className='info-name-text'>STATE</div>

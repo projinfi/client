@@ -76,6 +76,9 @@ const Navbar = () => {
   const redirectHome = () => {
     navigate('/')
   }
+  const moveToSettingsPage = () => {
+    navigate('/settings')
+  }
   
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -198,7 +201,7 @@ const Navbar = () => {
   </MenuItem>
 
   <Divider />
-  <MenuItem onClick={handleClose}>
+  <MenuItem onClick={moveToSettingsPage}>
     <ListItemIcon>
       <Settings fontSize="small" />
     </ListItemIcon>
