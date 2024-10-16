@@ -18,6 +18,9 @@
     margin-top: 100px;
     max-width: 1400px;
 }
+.astrik{
+    color: red;
+}
 @font-face {
     font-family: Inter;
     src: url("./fonts/Inter.ttf");
