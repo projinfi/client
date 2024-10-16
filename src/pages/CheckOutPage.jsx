@@ -26,7 +26,7 @@ const CheckOutPage = () => {
           {pageStatus === 1 && <ShippingAddress />}
           {pageStatus === 2 && <PaymentInfo />}
           <div className='checkout-btn-space'>
-            <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
+            {pageStatus === 2 && (<div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>)}
             <div onClick={goToNextPage} className='checkout-next-btn'>Next</div>
           </div>
         </div>
