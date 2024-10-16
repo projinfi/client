@@ -20,6 +20,10 @@ const ShippingAddress = () => {
         alternatephone: ""
     })
 
+    const caseChanger = (str) => {
+        return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
+
     const getZipData = async () => {
         try {
             const response = await axios.get(`https://api.data.gov.in/resource/5c2f62fe-5afa-4119-a499-fec9d604d5bd?api-key=579b464db66ec23bdd000001240e8951c9cf467e58512d4fd7cca7a6&format=json&filters[pincode]=${shippingAddress.zipcode}`,{
@@ -102,7 +106,7 @@ const ShippingAddress = () => {
               <div className='info-first-name'>
                   <div className='info-name-text'>STATE <span className='astrik'>*</span></div>
                   <div className='info-input'>
-                      <input name='state' value={shippingAddress.state} onChange={getShippingDetails} className='info-input-field' placeholder='State' />
+                      <input name='state' value={caseChanger(shippingAddress.state)} onChange={getShippingDetails} className='info-input-field' placeholder='State' />
                   </div>
               </div>
           </div>
