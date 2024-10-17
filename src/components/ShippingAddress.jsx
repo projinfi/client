@@ -2,23 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../components/ShippingAddress.css';
 import axios from 'axios'
 
-const ShippingAddress = () => {
-
-  const[ZipCode,setZipCode] = useState()
-  const[Town,setTown] = useState()
-  const[State,setState] = useState()
-
-    const [shippingAddress, setShippingAddress] = useState({
-        name: "",
-        phone: null,
-        zipcode: null,
-        locality: "",
-        address: "",
-        city: "",
-        state: "",
-        landmark: "",
-        alternatephone: ""
-    })
+const ShippingAddress = ({shippingAddress,setShippingAddress}) => {
 
     const caseChanger = (str) => {
         return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -92,7 +76,7 @@ const ShippingAddress = () => {
           <div className='info-field-box'>
               <div className='info-name-text'>ADDRESS <span className='astrik'>*</span></div>
               <div className='info-input'>
-                  <textarea name='address' value={shippingAddress.address} onChange={getShippingDetails} style={{height:"100px"}} className='info-input-field' placeholder='Your Address' />
+                  <textarea name='deladdress' value={shippingAddress.deladdress} onChange={getShippingDetails} style={{height:"100px"}} className='info-input-field' placeholder='Your Address' />
               </div>
           </div>
           <div className='info-first-lastname'>

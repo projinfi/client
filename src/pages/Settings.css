@@ -2,7 +2,8 @@
     background-color: antiquewhite;
 }
 .settings-contact-info{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
     padding: 40px 0px;
     width: 100%;
     gap: 22px;
