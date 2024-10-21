@@ -31,7 +31,7 @@ const CheckOutPage = () => {
     if (pageStatus < 2) {
       try {
         setLoading(true);
-        const response = await axios.post("http://localhost:3000/address/addDeliveryAddress", shippingAddress, {
+        const response = await axios.post("https://server-orcin-delta.vercel.app/address/addDeliveryAddress", shippingAddress, {
           headers: {
             'Content-Type': "application/json"
           }
