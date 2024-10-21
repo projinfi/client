@@ -33,7 +33,7 @@ const ProductCard = ({ product_id, name, description, image, price, quantity }) 
     }, [showLoginModal])
 
     const addToCart = async (product_id, name, description, image, price, quantity) => {
-
+        
         if (token) {
             try {
                 const nextQuantity = addQuantity + 1;
@@ -55,7 +55,7 @@ const ProductCard = ({ product_id, name, description, image, price, quantity }) 
                             'Content-Type': 'application/json'
                         }
                     })
-                console.log(cartProduct)
+                console.log("added",cartProduct)
 
             } catch (err) {
                 console.log("cannot add product to cart", err)

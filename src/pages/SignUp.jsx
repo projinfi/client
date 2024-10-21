@@ -61,6 +61,7 @@ const SignUp = () => {
             if(response.data.name && response.data){
                 setSuccessMsg('registered successfully')
                 localStorage.setItem('userToken',response.data.usertoken)
+                localStorage.setItem('userId',response.data.user_id)
                 setIsLoading(false)
                 console.log('success', response)
                 navigate("/")
