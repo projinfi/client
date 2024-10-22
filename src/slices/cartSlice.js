@@ -64,6 +64,8 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState: {
         items: [],
+        shippingCost : 0,
+        shippingMode : 'free',
         totalAmount: 0, // New state to track total amount
     },
     reducers: {
@@ -106,6 +108,12 @@ export const cartSlice = createSlice({
             }
             state.totalAmount = calculateTotalAmount(state.items);
         },
+        addShippingMethod(state, action) {
+            state.shippingCost = action.payload; // Update shipping cost;
+        },
+        addShippingMode(state,action){
+            state.shippingMode = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -134,7 +142,7 @@ const calculateTotalAmount = (items) => {
     return items.reduce((total, item) => total + item.product_price * item.order_quantity, 0);
 };
 
-export const { addToReduxCart, removeReduxCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+export const { addToReduxCart, removeReduxCart, incrementQuantity, decrementQuantity, addShippingMethod,addShippingMode} = cartSlice.actions;
 export default cartSlice.reducer;
 
 

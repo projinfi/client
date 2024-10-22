@@ -49,6 +49,16 @@ width: 100%;
     color: white;
     border-radius: 6px;
 }
+.overall-total-price{
+  background-color: rgb(255, 255, 255);
+  padding:22px 19px;
+  font-size: 22px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: flex-end;
+  
+}
 @media screen and (max-width:800px) and (min-width:0px) {
   .checkout-page-content{
     display: flex;

@@ -8,11 +8,15 @@ import PaymentInfo from '../components/PaymentInfo';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import CartSummary from '../components/CartSummary';
+import { useSelector } from 'react-redux';
 
 const CheckOutPage = () => {
   const [pageStatus, setPageStatus] = useState(1);
   const userId = parseInt(localStorage.getItem('userId'), 10);
   const [loading, setLoading] = useState(false);
+  const reduxTotalAmount = useSelector((state) => state.cart.totalAmount );
+  const shippingCost = useSelector((state) => state.cart.shippingCost );
 
   const [shippingAddress, setShippingAddress] = useState({
     user_id: userId,
@@ -73,7 +77,12 @@ const CheckOutPage = () => {
             </div>
           </div>
         </div>
-        <div className='checkout-page-right'><CartTable /></div>
+        <div className='checkout-page-right'>
+          <CartTable />
+          <div className='overall-total-price'>
+            <div className='sub-total-price'>Sub Total : ₹ {reduxTotalAmount + shippingCost}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

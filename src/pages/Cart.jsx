@@ -67,7 +67,7 @@ const Cart = () => {
               <CartTable />
             </div>
             <div className='cart-display-right'>
-              <CartSummary />
+              <CartSummary onStepChange={setCurrentStep}/>
             </div>
           </div>)
           }
