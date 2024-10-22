@@ -12,7 +12,6 @@ const CartSummary = ({onStepChange}) => {
   const shippingMode = useSelector((state) => state.cart.shippingMode );
   const shippingCost = useSelector((state) => state.cart.shippingCost );
 
-  const[selectedShipping,setSelectedShipping] = useState("free")
   console.log(reduxTotalAmount)
   const dispatch = useDispatch()
 

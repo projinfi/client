@@ -17,6 +17,7 @@ const CheckOutPage = () => {
   const [loading, setLoading] = useState(false);
   const reduxTotalAmount = useSelector((state) => state.cart.totalAmount );
   const shippingCost = useSelector((state) => state.cart.shippingCost );
+  const [isFieldsValid,setIsFieldsValid] = useState(false)
 
   const [shippingAddress, setShippingAddress] = useState({
     user_id: userId,
@@ -60,13 +61,13 @@ const CheckOutPage = () => {
     <div className='checkout-page'>
       <div className='checkout-page-content'>
         <div className='checkout-page-left'>
-          {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} />}
+          {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid}/>}
           {pageStatus === 2 && <PaymentInfo />}
           <div className='checkout-btn-space'>
             {pageStatus === 2 && (
               <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
             )}
-            <div onClick={goToNextPage} className='checkout-next-btn'>
+            <div onClick={goToNextPage} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
               {loading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <CircularProgress color='inherit' size={20} />

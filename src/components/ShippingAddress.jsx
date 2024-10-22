@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../components/ShippingAddress.css';
 import axios from 'axios'
 
-const ShippingAddress = ({shippingAddress,setShippingAddress}) => {
+const ShippingAddress = ({shippingAddress,setShippingAddress,isFieldsValid}) => {
 
     const caseChanger = (str) => {
         return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -32,12 +32,28 @@ const ShippingAddress = ({shippingAddress,setShippingAddress}) => {
     setShippingAddress( (prev) => ({...prev, [name] : value}))
   }
 
+  const validateFields = () => {
+   const {name,phone,zipcode,locality,deladdress,city,state,landmark,alternatephone} = shippingAddress;
+   const isPhoneValid = phone && phone.length === 10 && /^\d+$/.test(phone);
+   const isAltPhoneValid = alternatephone && alternatephone.length === 10 && /^\d+$/.test(alternatephone);
+   const isZipCodeValid = zipcode && zipcode.length === 6 && /^\d+$/.test(zipcode);
+   const areFieldsValid = name && locality && deladdress && city && state && landmark
+   if(isAltPhoneValid && isZipCodeValid && isPhoneValid && areFieldsValid){
+    isFieldsValid(true)
+   }else{
+    isFieldsValid(false)
+   }
+  }
+
   console.log(shippingAddress)
 
     useEffect(() => {
         getZipData()
     }, [shippingAddress.zipcode])
 
+    useEffect(()=>{
+      validateFields()
+    },[shippingAddress])
  
 
   return (

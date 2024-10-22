@@ -59,6 +59,12 @@ width: 100%;
   justify-content: flex-end;
   
 }
+.disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 @media screen and (max-width:800px) and (min-width:0px) {
   .checkout-page-content{
     display: flex;
