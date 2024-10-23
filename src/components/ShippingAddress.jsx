@@ -112,14 +112,14 @@ const ShippingAddress = ({shippingAddress,setShippingAddress,isFieldsValid}) => 
           </div>
           <div className='info-first-lastname'>
               <div className='info-first-name'>
-                  <div className='info-name-text'>LANDMARK</div>
+                  <div className='info-name-text'>LANDMARK <span className='astrik'>*</span></div>
                   <div className='info-input'>
                   <input name='landmark' value={shippingAddress.landmark} onChange={getShippingDetails} className='info-input-field' placeholder='Landmark' />
                   </div>
               </div>
 
               <div className='info-first-name'>
-                  <div className='info-name-text'>ALTERNATE PHONE</div>
+                  <div className='info-name-text'>ALTERNATE PHONE <span className='astrik'>*</span></div>
                   <div className='info-input'>
                       <input name='alternatephone' value={shippingAddress.alternatephone} onChange={getShippingDetails} className='info-input-field' placeholder='Phone' />
                   </div>

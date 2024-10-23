@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../pages/CheckOutPage.css';
 import CartTable from '../components/CartTable';
 import ContactInfo from '../components/ContactInfo';
@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import CartSummary from '../components/CartSummary';
 import { useSelector } from 'react-redux';
+import AddressCard from '../components/AddressCard';
 
 const CheckOutPage = () => {
   const [pageStatus, setPageStatus] = useState(1);
@@ -32,6 +33,12 @@ const CheckOutPage = () => {
     alternatephone: ""
   });
 
+  const [userAddress,setUserAddress] = useState([{
+    user_id: userId,
+    name: "",
+    address: "",
+  }])
+
   const goToNextPage = async () => {
     if (pageStatus < 2) {
       try {
@@ -51,16 +58,43 @@ const CheckOutPage = () => {
     }
   };
 
+  const getDeliveryAddress = async () => {
+    try {
+      const resAddress = await axios.post("https://server-orcin-delta.vercel.app/address/getDeliveryAddress",{"user_id":userId},{
+          headers:{
+            "Content-Type" : "application/json"
+          }
+        })
+        console.log(resAddress)
+        setUserAddress(resAddress.data)
+    }catch(error){
+      console.log("can't get delivery address")
+    }
+  }
+
   const goToPrevPage = () => {
     if (pageStatus > 1) {
       setPageStatus(pageStatus - 1);
     }
   };
 
+  useEffect(() => {
+    getDeliveryAddress()
+  }, [])
+
   return (
     <div className='checkout-page'>
       <div className='checkout-page-content'>
+
         <div className='checkout-page-left'>
+         <div className='delivering-to-section'>
+         Delivering to :
+         </div>
+          {userAddress.map((data) => (
+            <AddressCard data={data}/>
+          )
+          )}
+        
           {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid}/>}
           {pageStatus === 2 && <PaymentInfo />}
           <div className='checkout-btn-space'>
@@ -77,7 +111,9 @@ const CheckOutPage = () => {
               )}
             </div>
           </div>
+          
         </div>
+
         <div className='checkout-page-right'>
           <CartTable />
           <div className='overall-total-price'>
