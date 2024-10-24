@@ -52,11 +52,11 @@ width: 100%;
 .overall-total-price{
   background-color: rgb(255, 255, 255);
   padding:22px 19px;
-  font-size: 22px;
-  font-weight: 600;
   color: rgb(0, 0, 0);
   display: flex;
   justify-content: flex-end;
+  flex-direction: column;
+  gap: 22px;
   
 }
 .disabled{
@@ -103,6 +103,25 @@ width: 100%;
   width: 20px;
   height: 20px;
 }
+.proceed-payment-space{
+  padding: 0px 20px 20px 0px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.cart-check-btn{
+  width: 100%;
+  max-width: 650px;
+ 
+
+}
+.sub-total-price{
+  font-size: 22px;
+  font-weight: 600;
+  text-align: end;
+}
 
 @media screen and (max-width:800px) and (min-width:0px) {
   .checkout-page-content{
@@ -111,5 +130,12 @@ width: 100%;
   }
   .checkout-page-left{
     order: 2;
+  }
+  .proceed-payment-space{
+    justify-content: center;
+  }
+  .cart-check-btn{
+    max-width: 320px;
+    border-radius: 0px;
   }
 }

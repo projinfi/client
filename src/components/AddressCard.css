@@ -1,5 +1,5 @@
 .address-card{
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(241, 241, 241);
     padding: 18px;
     line-height: 32px;
     font-size: 18px;
@@ -8,6 +8,7 @@
     flex-direction: row;
     align-items: center;
     gap: 22px;
+    margin-bottom: 8px;
 }
 .address-card-name{
     font-weight: 500;

@@ -12,15 +12,17 @@ import CartSummary from '../components/CartSummary';
 import { useSelector } from 'react-redux';
 import AddressCard from '../components/AddressCard';
 import addIcon from '../assets/add.png';
+import AddressCardSkelton from '../skeletons/AddressCardSkelton';
 
 const CheckOutPage = () => {
   const [pageStatus, setPageStatus] = useState(1);
   const userId = parseInt(localStorage.getItem('userId'), 10);
   const [loading, setLoading] = useState(false);
-  const reduxTotalAmount = useSelector((state) => state.cart.totalAmount );
-  const shippingCost = useSelector((state) => state.cart.shippingCost );
-  const [isFieldsValid,setIsFieldsValid] = useState(false)
-  const [addNewAddress,setAddNewAddress] = useState(false)
+  const reduxTotalAmount = useSelector((state) => state.cart.totalAmount);
+  const shippingCost = useSelector((state) => state.cart.shippingCost);
+  const [isFieldsValid, setIsFieldsValid] = useState(false)
+  const [addNewAddress, setAddNewAddress] = useState(false)
+  const [getAddressLoader, setGetAddressLoader] = useState(true)
 
   const [shippingAddress, setShippingAddress] = useState({
     user_id: userId,
@@ -35,7 +37,7 @@ const CheckOutPage = () => {
     alternatephone: ""
   });
 
-  const [userAddress,setUserAddress] = useState([{
+  const [userAddress, setUserAddress] = useState([{
     user_id: userId,
     name: "",
     address: "",
@@ -62,22 +64,23 @@ const CheckOutPage = () => {
 
   const getDeliveryAddress = async () => {
     try {
-      const resAddress = await axios.post("https://server-orcin-delta.vercel.app/address/getDeliveryAddress",{"user_id":userId},{
-          headers:{
-            "Content-Type" : "application/json"
-          }
-        })
-        if(resAddress.data.length > 0){
-          setAddNewAddress(false)
-        }else{
-          setAddNewAddress(true)
+      const resAddress = await axios.post("https://server-orcin-delta.vercel.app/address/getDeliveryAddress", { "user_id": userId }, {
+        headers: {
+          "Content-Type": "application/json"
         }
-        console.log(resAddress)
-        setUserAddress(resAddress.data)
-      
-    }catch(error){
+      })
+      if (resAddress.data.length > 0) {
+        setAddNewAddress(false)
+      } else {
+        setAddNewAddress(true)
+      }
+      console.log(resAddress)
+      setUserAddress(resAddress.data)
+      setGetAddressLoader(false)
+
+    } catch (error) {
       console.log("can't get delivery address")
- 
+      setGetAddressLoader(false)
     }
   }
 
@@ -94,57 +97,55 @@ const CheckOutPage = () => {
   return (
     <div className='checkout-page'>
       <div className='checkout-page-content'>
-
         <div className='checkout-page-left'>
-
-          {userAddress.length > 0 && (<div className='delivery-address-section'>
-            <div className='delivering-to-section'>
-              Delivering to :
-            </div>
-            {userAddress.map((data) => (
-              <AddressCard data={data} />
-            )
-            )}
-            <div className='del-btn-space'>
-              
-              <div className='add-del-address'>
-                <span> <img className='add-icon' src={addIcon} /></span>
-                <span onClick={()=>setAddNewAddress(true)}> Add New Address</span>
+          {getAddressLoader ? (<AddressCardSkelton />) : (<>
+            {userAddress.length > 0 && (<div className='delivery-address-section'>
+              <div className='delivering-to-section'>
+                Delivering to :
               </div>
-             
-            </div>
-          </div>)}
-
-         
-          {
-            addNewAddress  && (
-              <div>
-              {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid} />}
-              {pageStatus === 2 && <PaymentInfo />}
-  
-              <div className='checkout-btn-space'>
-                {pageStatus === 2 && (
-                  <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
-                )}
-                <div onClick={goToNextPage} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
-                  {loading ? (
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <CircularProgress color='inherit' size={20} />
-                    </Box>
-                  ) : (
-                    "Next"
-                  )}
+              {userAddress.map((data) => (
+                <AddressCard data={data} />
+              )
+              )}
+              <div className='del-btn-space'>
+                <div className='add-del-address'>
+                  <span> <img className='add-icon' src={addIcon} /></span>
+                  <span onClick={() => setAddNewAddress(true)}> Add New Address</span>
                 </div>
-              </div>
-            </div>
-            )
-          }
-        </div>
 
+              </div>
+            </div>)}
+            {
+              addNewAddress && (
+                <div>
+                  {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid} />}
+                  {pageStatus === 2 && <PaymentInfo />}
+                  <div className='checkout-btn-space'>
+                    {pageStatus === 2 && (
+                      <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
+                    )}
+                    <div onClick={goToNextPage} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
+                      {loading ? (
+                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                          <CircularProgress color='inherit' size={20} />
+                        </Box>
+                      ) : (
+                        "Next"
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+          </>)}
+        </div>
         <div className='checkout-page-right'>
           <CartTable />
           <div className='overall-total-price'>
             <div className='sub-total-price'>Sub Total : ₹ {reduxTotalAmount + shippingCost}</div>
+           
+              <div className='cart-checkout-btn cart-check-btn'>Proceed To Payment</div>
+           
           </div>
         </div>
       </div>

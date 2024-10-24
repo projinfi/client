@@ -48,7 +48,7 @@ const CartSummary = ({onStepChange}) => {
             <div className='total-amount-title'>Total</div>
             <div className='total-amount-number'>₹ {reduxTotalAmount + shippingCost}</div>
         </div>
-        <div onClick={()=>onStepChange(2)} className='cart-checkout-btn'>Checkout</div>
+        <div onClick={()=>onStepChange(2)} className='cart-checkout-btn'>Proceed To Checkout</div>
     </div>
   )
 }
