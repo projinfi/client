@@ -1,5 +1,5 @@
 .checkout-page{
-    background-color: rgb(208, 205, 201);
+    background-color: rgb(226, 222, 217);
     width: 100%;
 }
 .checkout-page-content{
@@ -67,6 +67,41 @@ width: 100%;
 .delivering-to-section{
   font-size: 22px;
   font-weight: 500;
+  margin-bottom: 16px;
+}
+.del-btn-space{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 12px;
+}
+.delivering-next-btn{
+  background-color: rgb(6, 129, 195);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 80px;
+  padding: 8px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+.add-del-address{
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: rgb(0, 148, 255);
+  cursor: pointer;
+  line-height: 4px;
+  padding: 20px 0px;
+}
+.add-icon{
+  width: 20px;
+  height: 20px;
 }
 
 @media screen and (max-width:800px) and (min-width:0px) {

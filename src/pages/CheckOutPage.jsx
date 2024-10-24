@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import CartSummary from '../components/CartSummary';
 import { useSelector } from 'react-redux';
 import AddressCard from '../components/AddressCard';
+import addIcon from '../assets/add.png';
 
 const CheckOutPage = () => {
   const [pageStatus, setPageStatus] = useState(1);
@@ -19,6 +20,7 @@ const CheckOutPage = () => {
   const reduxTotalAmount = useSelector((state) => state.cart.totalAmount );
   const shippingCost = useSelector((state) => state.cart.shippingCost );
   const [isFieldsValid,setIsFieldsValid] = useState(false)
+  const [addNewAddress,setAddNewAddress] = useState(false)
 
   const [shippingAddress, setShippingAddress] = useState({
     user_id: userId,
@@ -65,10 +67,17 @@ const CheckOutPage = () => {
             "Content-Type" : "application/json"
           }
         })
+        if(resAddress.data.length > 0){
+          setAddNewAddress(false)
+        }else{
+          setAddNewAddress(true)
+        }
         console.log(resAddress)
         setUserAddress(resAddress.data)
+      
     }catch(error){
       console.log("can't get delivery address")
+ 
     }
   }
 
@@ -87,31 +96,49 @@ const CheckOutPage = () => {
       <div className='checkout-page-content'>
 
         <div className='checkout-page-left'>
-         <div className='delivering-to-section'>
-         Delivering to :
-         </div>
-          {userAddress.map((data) => (
-            <AddressCard data={data}/>
-          )
-          )}
-        
-          {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid}/>}
-          {pageStatus === 2 && <PaymentInfo />}
-          <div className='checkout-btn-space'>
-            {pageStatus === 2 && (
-              <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
-            )}
-            <div onClick={goToNextPage} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
-              {loading ? (
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <CircularProgress color='inherit' size={20} />
-                </Box>
-              ) : (
-                "Next"
-              )}
+
+          {userAddress.length > 0 && (<div className='delivery-address-section'>
+            <div className='delivering-to-section'>
+              Delivering to :
             </div>
-          </div>
-          
+            {userAddress.map((data) => (
+              <AddressCard data={data} />
+            )
+            )}
+            <div className='del-btn-space'>
+              
+              <div className='add-del-address'>
+                <span> <img className='add-icon' src={addIcon} /></span>
+                <span onClick={()=>setAddNewAddress(true)}> Add New Address</span>
+              </div>
+             
+            </div>
+          </div>)}
+
+         
+          {
+            addNewAddress  && (
+              <div>
+              {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid} />}
+              {pageStatus === 2 && <PaymentInfo />}
+  
+              <div className='checkout-btn-space'>
+                {pageStatus === 2 && (
+                  <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
+                )}
+                <div onClick={goToNextPage} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
+                  {loading ? (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <CircularProgress color='inherit' size={20} />
+                    </Box>
+                  ) : (
+                    "Next"
+                  )}
+                </div>
+              </div>
+            </div>
+            )
+          }
         </div>
 
         <div className='checkout-page-right'>
