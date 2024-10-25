@@ -98,7 +98,7 @@ const CheckOutPage = ({onStepChange}) => {
     <div className='checkout-page'>
       <div className='checkout-page-content'>
         <div className='checkout-page-left'>
-          {getAddressLoader ? (<AddressCardSkelton />) : (<>
+          {getAddressLoader ? (<AddressCardSkelton />) : (<div style={{width:"100%"}}>
             {userAddress.length > 0 && (<div className='delivery-address-section'>
               <div className='delivering-to-section'>
                 Delivering to :
@@ -136,7 +136,7 @@ const CheckOutPage = ({onStepChange}) => {
                 </div>
               )
             }
-          </>)}
+          </div>)}
         </div>
         <div className='checkout-page-right'>
           <CartTable />
