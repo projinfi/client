@@ -53,6 +53,9 @@ const CheckOutPage = () => {
           }
         });
         console.log(response);
+  
+        // Fetch the updated address list
+        await getDeliveryAddress();
         setPageStatus(pageStatus + 1);
       } catch (error) {
         console.log("Can't post address details");
@@ -130,7 +133,7 @@ const CheckOutPage = () => {
                           <CircularProgress color='inherit' size={20} />
                         </Box>
                       ) : (
-                        "Next"
+                       <div>Add</div>
                       )}
                     </div>
                   </div>

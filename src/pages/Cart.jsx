@@ -56,7 +56,7 @@ const Cart = () => {
 
             <div onClick={() => stepperStatus(3)} className={`navigation-content ${currentStep === 3 ? ('on-process') : ('off-process')}`}>
               <div className={`navigation-count-btn ${currentStep === 3 && ('on-process-bg')}`}>3</div>
-              <div className='navigation-btn-text'>Order complete</div>
+              <div className='navigation-btn-text'>Payment</div>
             </div>
           </div>
         </div>
