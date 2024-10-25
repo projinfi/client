@@ -10,53 +10,52 @@ const ShippingAddress = ({shippingAddress,setShippingAddress,isFieldsValid}) => 
 
     const getZipData = async () => {
         try {
-            const response = await axios.get(`https://api.data.gov.in/resource/5c2f62fe-5afa-4119-a499-fec9d604d5bd?api-key=579b464db66ec23bdd000001240e8951c9cf467e58512d4fd7cca7a6&format=json&filters[pincode]=${shippingAddress.zipcode}`,{
+            const response = await axios.get(`https://api.data.gov.in/resource/5c2f62fe-5afa-4119-a499-fec9d604d5bd?api-key=579b464db66ec23bdd000001240e8951c9cf467e58512d4fd7cca7a6&format=json&filters[pincode]=${shippingAddress.zipcode}`, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
             console.log("zip data", response.data.records[0].statename)
             const data = response.data.records[0]
-            setShippingAddress((prev)=>({...prev, state: data.statename}))
-            setShippingAddress((prev)=>({...prev, city : data.officename.split(" ")[0]
-                
+            setShippingAddress((prev) => ({ ...prev, state: data.statename }))
+            setShippingAddress((prev) => ({
+                ...prev, city: data.officename.split(" ")[0]
+
             }))
-          
+
         } catch (error) {
             console.log("error feting the zip data")
         }
     }
 
-  const getShippingDetails = (e) => {
-    const {name,value} = e.target;
-    setShippingAddress( (prev) => ({...prev, [name] : value}))
-  }
+    const getShippingDetails = (e) => {
+        const { name, value } = e.target;
+        setShippingAddress((prev) => ({ ...prev, [name]: value }))
+    }
 
-  const validateFields = () => {
-   const {name,phone,zipcode,locality,deladdress,city,state,landmark,alternatephone} = shippingAddress;
-   const isPhoneValid = phone && phone.length === 10 && /^\d+$/.test(phone);
-   const isAltPhoneValid = alternatephone && alternatephone.length === 10 && /^\d+$/.test(alternatephone);
-   const isZipCodeValid = zipcode && zipcode.length === 6 && /^\d+$/.test(zipcode);
-   const areFieldsValid = name && locality && deladdress && city && state && landmark
-   if(isAltPhoneValid && isZipCodeValid && isPhoneValid && areFieldsValid){
-    isFieldsValid(true)
-   }else{
-    isFieldsValid(false)
-   }
-  }
-
-  console.log(shippingAddress)
+    const validateFields = () => {
+        const { name, phone, zipcode, locality, deladdress, city, state, landmark, alternatephone } = shippingAddress;
+        const isPhoneValid = phone && phone.length === 10 && /^\d+$/.test(phone);
+        const isAltPhoneValid = alternatephone && alternatephone.length === 10 && /^\d+$/.test(alternatephone);
+        const isZipCodeValid = zipcode && zipcode.length === 6 && /^\d+$/.test(zipcode);
+        const areFieldsValid = name && locality && deladdress && city && state && landmark
+        if (isAltPhoneValid && isZipCodeValid && isPhoneValid && areFieldsValid) {
+            isFieldsValid(true)
+        } else {
+            isFieldsValid(false)
+        }
+    }
+    console.log(shippingAddress)
 
     useEffect(() => {
         getZipData()
     }, [shippingAddress.zipcode])
 
-    useEffect(()=>{
-      validateFields()
-    },[shippingAddress])
- 
+    useEffect(() => {
+        validateFields()
+    }, [shippingAddress])
 
-  return (
+    return (
     <div className='info-box'>
         <div className='info-title'>Shipping Address </div>
         <div className='info-first-lastname'>

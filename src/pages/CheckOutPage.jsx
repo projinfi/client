@@ -24,6 +24,8 @@ const CheckOutPage = ({onStepChange}) => {
   const [addNewAddress, setAddNewAddress] = useState(false)
   const [getAddressLoader, setGetAddressLoader] = useState(true)
 
+  console.log("userId>>>>>>>>>>>>>>>",userId)
+
   const [shippingAddress, setShippingAddress] = useState({
     user_id: userId,
     name: "",
