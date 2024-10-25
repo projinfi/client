@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    padding: 50px 10px;
     display: flex;
     flex-direction: column;
     gap: 22px;
