@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCartData } from '../slices/cartSlice';
 import LoadingCat from '../components/LoadingCat';
 import CheckOutPage from './CheckOutPage';
+import PaymentInfo from '../components/PaymentInfo';
 
 
 const Cart = () => {
@@ -53,14 +54,12 @@ const Cart = () => {
               <div className={`navigation-count-btn ${currentStep === 2 && ('on-process-bg')}`}>2</div>
               <div className='navigation-btn-text'>Checkout details</div>
             </div>
-
             <div onClick={() => stepperStatus(3)} className={`navigation-content ${currentStep === 3 ? ('on-process') : ('off-process')}`}>
               <div className={`navigation-count-btn ${currentStep === 3 && ('on-process-bg')}`}>3</div>
               <div className='navigation-btn-text'>Payment</div>
             </div>
           </div>
         </div>
-
           {
             currentStep === 1 && (<div className='cart-display-container'>
               <div className='cart-display-left'>
@@ -71,9 +70,8 @@ const Cart = () => {
               </div>
             </div>)
           }
-
-          {currentStep === 2 && (<div><CheckOutPage /></div>)}
-
+          {currentStep === 2 && (<div><CheckOutPage onStepChange={setCurrentStep} /></div>)}
+          {currentStep === 3 && (<div><PaymentInfo onStepChange={setCurrentStep} /></div>)}
         </>
         ) :
           (<EmptyCart />)}

@@ -1,3 +1,13 @@
 .info-radio-input{
     border: 1px solid gray;
 }
+.payment-content-section{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}

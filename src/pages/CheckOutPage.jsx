@@ -14,7 +14,7 @@ import AddressCard from '../components/AddressCard';
 import addIcon from '../assets/add.png';
 import AddressCardSkelton from '../skeletons/AddressCardSkelton';
 
-const CheckOutPage = () => {
+const CheckOutPage = ({onStepChange}) => {
   const [pageStatus, setPageStatus] = useState(1);
   const userId = parseInt(localStorage.getItem('userId'), 10);
   const [loading, setLoading] = useState(false);
@@ -43,25 +43,22 @@ const CheckOutPage = () => {
     address: "",
   }])
 
-  const goToNextPage = async () => {
-    if (pageStatus < 2) {
-      try {
-        setLoading(true);
-        const response = await axios.post("https://server-orcin-delta.vercel.app/address/addDeliveryAddress", shippingAddress, {
-          headers: {
-            'Content-Type': "application/json"
-          }
-        });
-        console.log(response);
-  
-        // Fetch the updated address list
-        await getDeliveryAddress();
-        setPageStatus(pageStatus + 1);
-      } catch (error) {
-        console.log("Can't post address details");
-      } finally {
-        setLoading(false);
-      }
+  const addAddress = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("https://server-orcin-delta.vercel.app/address/addDeliveryAddress", shippingAddress, {
+        headers: {
+          'Content-Type': "application/json"
+        }
+      });
+      console.log(response);
+
+      // Fetch the updated address list
+      await getDeliveryAddress();
+    } catch (error) {
+      console.log("Can't post address details");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -110,30 +107,29 @@ const CheckOutPage = () => {
                 <AddressCard data={data} />
               )
               )}
-              <div className='del-btn-space'>
+             {userAddress.length < 3 && (    <div className='del-btn-space'>
                 <div className='add-del-address'>
                   <span> <img className='add-icon' src={addIcon} /></span>
                   <span onClick={() => setAddNewAddress(true)}> Add New Address</span>
                 </div>
-
-              </div>
+              </div>)}
             </div>)}
             {
               addNewAddress && (
                 <div>
                   {pageStatus === 1 && <ShippingAddress shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} isFieldsValid={setIsFieldsValid} />}
-                  {pageStatus === 2 && <PaymentInfo />}
+                  {/* {pageStatus === 2 && <PaymentInfo />} */}
                   <div className='checkout-btn-space'>
                     {pageStatus === 2 && (
                       <div onClick={goToPrevPage} className='checkout-prev-btn'>Prev</div>
                     )}
-                    <div onClick={goToNextPage} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
+                    <div onClick={addAddress} className={`checkout-next-btn ${!isFieldsValid && ('disabled')}`}>
                       {loading ? (
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                           <CircularProgress color='inherit' size={20} />
                         </Box>
                       ) : (
-                       <div>Add</div>
+                        <div>Add</div>
                       )}
                     </div>
                   </div>
@@ -146,9 +142,7 @@ const CheckOutPage = () => {
           <CartTable />
           <div className='overall-total-price'>
             <div className='sub-total-price'>Sub Total : ₹ {reduxTotalAmount + shippingCost}</div>
-           
-              <div className='cart-checkout-btn cart-check-btn'>Proceed To Payment</div>
-           
+            <div onClick={()=>onStepChange(3)} className='cart-checkout-btn cart-check-btn'>Proceed To Payment</div>
           </div>
         </div>
       </div>

@@ -9,6 +9,8 @@
     align-items: center;
     gap: 22px;
     margin-bottom: 8px;
+    width: 100%;
+    max-width: 650px;
 }
 .address-card-name{
     font-weight: 500;

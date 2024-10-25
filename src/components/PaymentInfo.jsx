@@ -3,6 +3,7 @@ import '../components/PaymentInfo.css'
 
 const PaymentInfo = () => {
     return (
+        <div className='payment-content-section'>
         <div className='info-box'>
             <div className='info-title'>Payment Method</div>
             <div className='info-field-box'>
@@ -37,6 +38,9 @@ const PaymentInfo = () => {
                     </div>
                 </div>
             </div>
+            <div className='cart-checkout-btn cart-check-btn'>Pay Now</div>
+        </div>
+   
         </div>
     )
 }
