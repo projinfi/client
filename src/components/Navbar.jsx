@@ -103,9 +103,9 @@ const Navbar = () => {
           }
         );
         if (response.data) {
-          console.log(response.data)
+          console.log("navbar user id",response.data)
           dispatch(setAuthStatus("true"));
-          dispatch(setUserInfo({ userName: response.data.name , userEmail: response.data.email}));
+          dispatch(setUserInfo({ userName: response.data.name , userEmail: response.data.email, userId : response.data.userId}));
 
         } else {
           dispatch(setAuthStatus("false"));

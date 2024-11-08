@@ -16,13 +16,15 @@ import AddressCardSkelton from '../skeletons/AddressCardSkelton';
 
 const CheckOutPage = ({onStepChange}) => {
   const [pageStatus, setPageStatus] = useState(1);
-  const userId = parseInt(localStorage.getItem('userId'), 10);
+  // const userId = parseInt(localStorage.getItem('userId'), 10);
   const [loading, setLoading] = useState(false);
   const reduxTotalAmount = useSelector((state) => state.cart.totalAmount);
   const shippingCost = useSelector((state) => state.cart.shippingCost);
   const [isFieldsValid, setIsFieldsValid] = useState(false)
   const [addNewAddress, setAddNewAddress] = useState(false)
   const [getAddressLoader, setGetAddressLoader] = useState(true)
+
+  const userId = useSelector((state)=>state.auth.userId)
 
   console.log("userId>>>>>>>>>>>>>>>",userId)
 

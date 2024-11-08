@@ -12,7 +12,8 @@ const CartTable = () => {
     const [cartItems, setCartItems] = useState([]);
     const [cartData, setCartData] = useState([]);
     const dispatch = useDispatch();
-    const user_id = localStorage.getItem("userId")
+    const user_id = useSelector((state)=>state.auth.userId)
+    console.log("userid cart>>>>>>>>>>",user_id)
    
 console.log(reduxCartData.items)
     // Update cartItems only when reduxCartData changes

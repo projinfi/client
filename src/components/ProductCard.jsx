@@ -8,15 +8,18 @@ import { addToReduxCart } from '../slices/cartSlice';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import PleaseLoginModal from './PleaseLoginModal';
+import { useSelector } from 'react-redux';
 
 
 const ProductCard = ({ product_id, name, description, image, price, quantity }) => {
+
+    const userId = useSelector((state)=>state.auth.userId)
+    console.log("user id products>>>>>>>>>>>",userId)
 
     const [addQuantity, setAddQuantity] = useState(0)
     const [showLoginModal, setShowLoginModal] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const userId = parseInt(localStorage.getItem("userId"), 10)
     const token = localStorage.getItem('userToken')
 
     console.log(userId)
