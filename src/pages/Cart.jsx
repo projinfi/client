@@ -33,7 +33,7 @@ const Cart = () => {
       setLoading(false)
     }
     console.log("......................", loadingStatus)
-  }, [cartCount])
+  }, [dispatch,user_id])
 
   useEffect(() => {
 

@@ -58,10 +58,11 @@ const SignUp = () => {
                     'Content-Type': 'application/json'
                 }
             })
+            console.log("##########",response)
             if(response.data.name && response.data){
                 setSuccessMsg('registered successfully')
                 localStorage.setItem('userToken',response.data.usertoken)
-                localStorage.setItem('userId from signup',response.data.user_id)
+                localStorage.setItem('userId',response.data.id)
                 setIsLoading(false)
                 console.log('success', response)
                 navigate("/")
