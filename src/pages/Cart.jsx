@@ -17,10 +17,23 @@ const Cart = () => {
   const user_id = localStorage.getItem("userId")
   const dispatch = useDispatch()
   const cartCount = useSelector((state) => state.cart.items.length)
+  const loadingStatus = useSelector((state) => state.cart.loadingStatus)
   console.log(cartCount)
 
   const [Loading, setLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState(1)
+
+ 
+
+  useEffect(() => {
+    if (loadingStatus === "pending") {
+      setLoading(true)
+    }
+    if (loadingStatus === "fulfilled") {
+      setLoading(false)
+    }
+    console.log("......................", loadingStatus)
+  }, [cartCount])
 
   useEffect(() => {
 

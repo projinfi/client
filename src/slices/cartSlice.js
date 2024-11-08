@@ -66,6 +66,7 @@ export const cartSlice = createSlice({
         items: [],
         shippingCost : 0,
         shippingMode : 'free',
+        loadingStatus : 'idle',
         totalAmount: 0, // New state to track total amount
     },
     reducers: {
@@ -117,10 +118,23 @@ export const cartSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            .addCase(fetchCartData.pending,(state,action)=>{
+                state.loadingStatus = "pending"
+            })
+
+          
+            .addCase(fetchCartData.rejected,(state,action)=>{
+                state.loadingStatus = "rejected"
+            })
+
             .addCase(fetchCartData.fulfilled, (state, action) => {
+              
                 state.items = action.payload.map((item) => ({ ...item }));
                 state.totalAmount = calculateTotalAmount(state.items);
+                  state.loadingStatus = "fulfilled"
             })
+
             .addCase(updateProductQuantity.fulfilled, (state, action) => {
                 const { product_id, order_quantity } = action.payload;
                 const product = state.items.find((item) => item.product_id === product_id);
@@ -129,11 +143,13 @@ export const cartSlice = createSlice({
                 }
                 state.totalAmount = calculateTotalAmount(state.items);
             })
+
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 const product_id = action.payload;
                 state.items = state.items.filter((item) => item.product_id !== product_id);
                 state.totalAmount = calculateTotalAmount(state.items);
             });
+
     },
 });
 
